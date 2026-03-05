@@ -1,0 +1,139 @@
+/* TOPBAR GENERAL */
+.topbar {
+    background: #1e3a8a;
+    /* azul profundo */
+    padding: 12px 0;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.topbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+
+/* LOGO */
+.topbar-logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+/* LINKS */
+.topbar-links a,
+.dropdown-toggle {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.topbar-links a:hover,
+.dropdown-toggle:hover {
+    text-decoration: underline;
+}
+
+/* DROPDOWN */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 4px;
+    top: 25px;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 6px 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* SIDEBAR OSCURO ADELGAZADO */
+.sidebar {
+    background: #1e3a8a;
+    /* gris oscuro */
+    width: 220px;
+    /* <<--- ESTA ES LA CLAVE */
+    min-height: calc(100vh - 60px);
+    /* debajo del navbar */
+    padding: 20px 10px;
+    color: #d1d5db;
+    position: fixed;
+    /* sidebar fijo */
+    top: 60px;
+    /* altura del navbar */
+    left: 0;
+    border-right: 1px solid #1f2937;
+}
+
+/* Ajuste del contenido principal para no quedar debajo del sidebar */
+main {
+    margin-left: 220px;
+    /* igual al ancho del sidebar */
+}
+
+/* MENU */
+.sidebar-menu {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.sidebar-item a,
+.sidebar-subitem a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: #d1d5db;
+    font-weight: 500;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.sidebar-item a:hover,
+.sidebar-subitem a:hover {
+    background: #1f2937;
+    color: #ffffff;
+}
+
+/* SECCIÓN */
+.sidebar-section {
+    margin-top: 25px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #9ca3af;
+    text-transform: uppercase;
+    padding-left: 12px;
+}
+
+/* SUBITEMS */
+.sidebar-subitem a {
+    padding-left: 25px;
+    font-size: 14px;
+}

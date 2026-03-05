@@ -1,0 +1,115 @@
+/* ===== Dashboard Layout ===== */
+
+.dashboard-header {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ===== KPI Cards ===== */
+
+.kpi-card {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s ease-in-out;
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+}
+
+.kpi-title {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+.kpi-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+/* ===== Cards for charts and lists ===== */
+
+.dashboard-card {
+    border: none;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+}
+
+.dashboard-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.dashboard-card-body {
+    padding: 20px;
+}
+
+/* ===== List styles ===== */
+
+.dashboard-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dashboard-list-item:last-child {
+    border-bottom: none;
+}
+
+.dashboard-list-name {
+    font-weight: 500;
+}
+
+.dashboard-list-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* SIDEBAR UNIFICADO CON NAVBAR */
+.sidebar {
+    background: #1e3a8a;
+    /* mismo azul que el navbar */
+    width: 220px;
+    min-height: calc(100vh - 60px);
+    padding: 20px 10px;
+    color: #ffffff;
+    /* texto blanco para mejor contraste */
+    position: fixed;
+    top: 60px;
+    left: 0;
+    border-right: none;
+    /* limpio y moderno */
+}
+
+/* Hover coherente */
+.sidebar-item a:hover,
+.sidebar-subitem a:hover {
+    background: #162c6e;
+    /* azul más oscuro */
+    color: #ffffff;
+}

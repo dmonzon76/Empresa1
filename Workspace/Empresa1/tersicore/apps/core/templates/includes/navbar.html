@@ -1,0 +1,24 @@
+<nav class="topbar">
+    <div class="topbar-content">
+
+        <div class="topbar-left">
+            <a href="{% url 'home' %}" class="topbar-logo">Tersicore ERP</a>
+        </div>
+
+        <div class="topbar-links">
+            <a href="{% url 'customers:list' %}">Customers</a>
+            <a href="{% url 'products:list' %}">Products</a>
+
+            <div class="dropdown">
+                <span class="dropdown-toggle">Categories ▾</span>
+                <div class="dropdown-menu">
+                    <a href="{% url 'categories:customers_list' %}">Customer Categories</a>
+                    <a href="{% url 'categories:products_list' %}">Product Categories</a>
+                </div>
+            </div>
+
+            <a href="{% url 'accounts:accounts-logout' %}">Logout</a>
+        </div>
+
+    </div>
+</nav>

@@ -1,0 +1,41 @@
+{% extends "bases/base.html" %}
+
+{% block title %}Customers{% endblock %}
+
+{% block content %}
+<div class="module-container">
+    <div class="module-header">
+        <h2>Customers</h2>
+        <a href="{% url 'customers:create' %}" class="btn btn-primary">New Customer</a>
+    </div>
+
+    <table class="table table-striped module-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th class="actions-col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for c in customers %}
+            <tr>
+                <td>{{ c.name }} {{ c.last_name }}</td>
+                <td>{{ c.email }}</td>
+                <td>{{ c.phone }}</td>
+                <td class="actions">
+                    <a href="{% url 'customers:edit' c.id %}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{% url 'customers:delete' c.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">There are no registered customers</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

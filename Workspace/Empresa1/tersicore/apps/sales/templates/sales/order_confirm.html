@@ -1,0 +1,19 @@
+{% extends "bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Confirm Order</h2>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-body">
+        <p>¿Do you want to confirm this order? Once confirmed, it cannot be edited.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Confirm</button>
+            <a href="{% url 'sales:order_detail' pk %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends "bases/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+            <!-- HEADER -->
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Dashboard</h1>
+            </div>
+
+            <!-- KPI CARDS (CUSTOMERS + PRODUCTS) -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="kpi-card d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="kpi-title">Active clients</div>
+                            <div class="kpi-value" data-kpi="{{ total_customers }}">0</div>
+                        </div>
+                        <div class="kpi-icon text-primary">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="kpi-card d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="kpi-title">Products</div>
+                            <div class="kpi-value" data-kpi="{{ total_products }}">0</div>
+                        </div>
+                        <div class="kpi-icon text-success">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI CARDS (SALES) -->
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>Sales Today</h6>
+                        <h2 id="kpi_sales_today">0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>Sales of the Month</h6>
+                        <h2 id="kpi_sales_month">0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>Total Orders</h6>
+                        <h2 id="kpi_sales_count">0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>Average Ticket</h6>
+                        <h2 id="kpi_ticket_avg">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI CARDS (INVENTORY) -->
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>Low Stock</h6>
+                        <h2 id="inv_low_stock">0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>Total Products</h6>
+                        <h2 id="inv_total_products">0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>Total Stock</h6>
+                        <h2 id="inv_total_stock">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHART + LIST -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <div class="dashboard-card-title">Customers by category</div>
+                        </div>
+                        <div class="dashboard-card-body">
+                            <canvas id="chartCustomersByCategory"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <div class="dashboard-card-title">Last customers</div>
+                        </div>
+                        <div class="dashboard-card-body">
+                            {% for c in last_customers %}
+                            <div class="dashboard-list-item">
+                                <span class="dashboard-list-name">{{ c.full_name }}</span>
+                                <span class="dashboard-list-date">{{ c.created_at|date:"d/m/Y" }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INVENTORY MONTHLY CHART -->
+            <div class="col-md-12 mt-4">
+                <div class="card">
+                    <div class="card-header">Inventory Movements (Monthly)</div>
+                    <div class="card-body">
+                        <canvas id="inventoryMonthlyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    window.dashboardData = {
+        categories_labels: {{ categories_labels | safe }},
+    categories_counts: { { categories_counts | safe } }
+    };
+</script>
+
+<script src="{% static 'core/js/dashboard.js' %}"></script>
+
+<script>
+    // INVENTORY KPIs
+    fetch("/inventory/api/kpis/")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("inv_low_stock").innerText = data.low_stock;
+            document.getElementById("inv_total_products").innerText = data.total_products;
+            document.getElementById("inv_total_stock").innerText = data.total_stock;
+        });
+</script>
+
+{% endblock %}

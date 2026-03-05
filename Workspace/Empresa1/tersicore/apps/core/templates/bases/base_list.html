@@ -1,0 +1,13 @@
+{% extends "bases/base.html" %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+<h2>{% block list_title %}List{% endblock %}</h2>
+
+<div>
+    {% block list_content %}
+    <!-- Aquí va la tabla o listado -->
+    {% endblock %}
+</div>
+{% endblock %}

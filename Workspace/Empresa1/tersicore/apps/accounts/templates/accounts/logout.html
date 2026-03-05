@@ -1,0 +1,10 @@
+{% extends "bases/base.html" %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Logged out</h2>
+    <p>You have successfully logged out.</p>
+
+    <a href="{% url 'accounts:accounts-login' %}" class="btn btn-primary">Login again</a>
+</div>
+{% endblock %}

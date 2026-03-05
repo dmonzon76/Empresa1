@@ -1,0 +1,47 @@
+{% extends "bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Sales Orders</h2>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-header d-flex justify-content-between">
+        <span class="dashboard-card-title">List</span>
+        <a href="{% url 'sales:order_create' %}" class="btn btn-primary btn-sm">New Orden</a>
+    </div>
+
+    <div class="dashboard-card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer }}</td>
+                    <td>{{ order.date }}</td>
+                    <td>{{ order.get_status_display }}</td>
+                    <td>${{ order.total_amount }}</td>
+                    <td>
+                        <a href="{% url 'sales:order_detail' order.id %}" class="btn btn-sm btn-outline-primary">Ver</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No hay órdenes registradas.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

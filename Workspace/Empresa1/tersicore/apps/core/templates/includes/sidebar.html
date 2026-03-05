@@ -1,0 +1,60 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+
+        <!-- SALES -->
+        <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+            Sales
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sales:order_list' %}">
+                    <i class="bi bi-receipt"></i>
+                    Orders
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sales:order_create' %}">
+                    <i class="bi bi-cart-plus"></i>
+                    New Order
+                </a>
+            </li>
+        </ul>
+
+        <hr>
+
+        <!-- INVENTORY -->
+        <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+            Inventory
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inventory:stock_list' %}">
+                    <i class="bi bi-boxes"></i>
+                    Stock
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inventory:movement_add' %}">
+                    <i class="bi bi-arrow-left-right"></i>
+                    New Movement
+                </a>
+            </li>
+        </ul>
+
+        <hr>
+
+        <!-- ACCOUNTING (placeholder) -->
+        <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+            Accounting
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">
+                    <i class="bi bi-cash-coin"></i>
+                    Coming soon
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
