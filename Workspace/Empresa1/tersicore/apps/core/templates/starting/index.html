@@ -75,28 +75,45 @@
                 </div>
             </div>
 
-            <!-- KPI CARDS (INVENTORY) -->
+            <!-- KPI CARDS (INVENTORY RESUMEN) -->
             <div class="row mt-4">
                 <div class="col-md-3">
                     <div class="card kpi-card">
                         <h6>Low Stock</h6>
-                        <h2 id="inv_low_stock">0</h2>
+                        <h2>{{ low_stock_count }}</h2>
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="card kpi-card">
-                        <h6>Total Products</h6>
-                        <h2 id="inv_total_products">0</h2>
+                        <h6>Total Stock (all units)</h6>
+                        <h2>{{ total_stock }}</h2>
                     </div>
                 </div>
+            </div>
 
+            <!-- KPI CARDS (STOCK POR UNIDAD DE MEDIDA) -->
+            <div class="row mt-4">
+                {% for item in stock_by_unit %}
                 <div class="col-md-3">
                     <div class="card kpi-card">
-                        <h6>Total Stock</h6>
-                        <h2 id="inv_total_stock">0</h2>
+                        <h6>Stock {{ item.quantity_type|upper }}</h6>
+                        <h2>{{ item.total_stock }}</h2>
                     </div>
                 </div>
+                {% endfor %}
+            </div>
+
+            <!-- KPI CARDS (STOCK POR CATEGORÍA) -->
+            <div class="row mt-4">
+                {% for item in stock_by_category %}
+                <div class="col-md-3">
+                    <div class="card kpi-card">
+                        <h6>{{ item.category__name|default:"Uncategorized" }}</h6>
+                        <h2>{{ item.total_stock }}</h2>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
 
             <!-- CHART + LIST -->
@@ -118,12 +135,27 @@
                             <div class="dashboard-card-title">Last customers</div>
                         </div>
                         <div class="dashboard-card-body">
-                            {% for c in last_customers %}
-                            <div class="dashboard-list-item">
-                                <span class="dashboard-list-name">{{ c.full_name }}</span>
-                                <span class="dashboard-list-date">{{ c.created_at|date:"d/m/Y" }}</span>
-                            </div>
-                            {% endfor %}
+                            <table class="table table-sm">
+                                <tbody>
+                                    {% for c in customers %}
+                                    <tr>
+                                        <td>{{ c.name }} {{ c.last_name }}</td>
+                                        <td>{{ c.email }}</td>
+                                        <td>{{ c.phone }}</td>
+                                        <td class="actions">
+                                            <a href="{% url 'customers:edit' c.id %}"
+                                                class="btn btn-sm btn-secondary">Edit</a>
+                                            <a href="{% url 'customers:delete' c.id %}"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4">No customers found.</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -158,16 +190,4 @@
 </script>
 
 <script src="{% static 'core/js/dashboard.js' %}"></script>
-
-<script>
-    // INVENTORY KPIs
-    fetch("/inventory/api/kpis/")
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("inv_low_stock").innerText = data.low_stock;
-            document.getElementById("inv_total_products").innerText = data.total_products;
-            document.getElementById("inv_total_stock").innerText = data.total_stock;
-        });
-</script>
-
 {% endblock %}

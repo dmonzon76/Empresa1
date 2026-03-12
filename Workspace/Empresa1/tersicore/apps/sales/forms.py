@@ -41,7 +41,7 @@ class SalesOrderItemForm(forms.ModelForm):
             try:
                 product_id = int(self.data.get("product"))
                 product = Product.objects.get(id=product_id)
-                self.fields["price"].initial = product.price
+                self.fields["price"].initial = product.pvp
             except (ValueError, Product.DoesNotExist):
                 pass
 

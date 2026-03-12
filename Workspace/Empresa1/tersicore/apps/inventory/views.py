@@ -6,13 +6,13 @@ from .inventory_forms import InventoryMovementForm
 
 class InventoryListView(ListView):
     model = InventoryItem
-    template_name = "inventory/stock_list.html"
+    template_name = "stock_list.html"
     context_object_name = "items"
     paginate_by = 20
 
 class InventoryDetailView(DetailView):
     model = InventoryItem
-    template_name = "inventory/stock_detail.html"
+    template_name = "stock_detail.html"
     context_object_name = "item"
 
     def get_context_data(self, **kwargs):
@@ -25,7 +25,7 @@ class InventoryDetailView(DetailView):
 class InventoryMovementCreateView(CreateView):
     model = InventoryMovement
     form_class = InventoryMovementForm
-    template_name = "inventory/movement_form.html"
+    template_name = "movement_form.html"
 
     def form_valid(self, form):
         movement = form.save()
