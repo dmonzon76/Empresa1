@@ -1,0 +1,64 @@
+{% extends "bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Order #{{ order.id }}</h2>
+</div>
+
+<div class="dashboard-card mb-4">
+    <div class="dashboard-card-header">
+        <span class="dashboard-card-title">Order Information</span>
+    </div>
+    <div class="dashboard-card-body">
+        <p><strong>Customer:</strong> {{ order.customer }}</p>
+        <p><strong>Date:</strong> {{ order.date }}</p>
+        <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+        <p><strong>Total:</strong> ${{ order.total_amount }}</p>
+
+        {% if order.status == "DRAFT" %}
+        <a href="{% url 'sales:order_edit' order.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'sales:item_add' order.id %}" class="btn btn-primary btn-sm">Add Item</a>
+        <a href="{% url 'sales:order_confirm' order.id %}" class="btn btn-success btn-sm">Confirm Order</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-header">
+        <span class="dashboard-card-title">Ítems</span>
+    </div>
+    <div class="dashboard-card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>${{ item.subtotal }}</td>
+                    <td>
+                        {% if order.status == "DRAFT" %}
+                        <a href="{% url 'sales:item_delete' item.id %}"
+                            class="btn btn-sm btn-outline-danger">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No items loaded.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

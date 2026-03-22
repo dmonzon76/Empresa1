@@ -1,0 +1,9 @@
+.kpi-title,
+.kpi-value {
+    display: block !important;
+    color: #1e293b !important;
+    font-size: 1.6rem !important;
+    line-height: 1.2 !important;
+    height: auto !important;
+    visibility: visible !important;
+}

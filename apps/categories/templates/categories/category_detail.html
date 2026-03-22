@@ -1,0 +1,17 @@
+{% extends "bases/base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>{{ category.name }}</h2>
+    </div>
+
+    <div class="card-body">
+        <p><strong>Prefix:</strong> {{ category.prefix }}</p>
+    </div>
+
+    <div class="card-footer">
+        <a href="{% url 'categories:category-list' %}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock %}

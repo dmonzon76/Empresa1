@@ -1,0 +1,41 @@
+{% extends "bases/base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<div class="module-container">
+    <div class="module-header">
+        <h2>Products</h2>
+        <a href="{% url 'products:create' %}" class="btn btn-primary">New Product</a>
+    </div>
+
+    <table class="table table-striped module-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th class="actions-col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>{{ p.name }}</td>
+                <td>{{ p.price }}</td>
+                <td>{{ p.stock }}</td>
+                <td class="actions">
+                    <a href="{% url 'products:edit' p.id %}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{% url 'products:delete' p.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">There are no registered products</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

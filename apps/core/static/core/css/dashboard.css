@@ -1,0 +1,175 @@
+/* ===== Dashboard Layout ===== */
+
+.dashboard-header {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ===== KPI Cards ===== */
+
+.kpi-card {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s ease-in-out;
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+}
+
+.kpi-title {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+.kpi-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+/* ===== Cards for charts and lists ===== */
+
+.dashboard-card {
+    border: none;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+}
+
+.dashboard-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.dashboard-card-body {
+    padding: 20px;
+}
+
+/* ===== List styles ===== */
+
+.dashboard-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dashboard-list-item:last-child {
+    border-bottom: none;
+}
+
+.dashboard-list-name {
+    font-weight: 500;
+}
+
+.dashboard-list-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+/* NAVBAR UNIFICADO CON SIDEBAR */
+.topbar {
+    background: #1e3a8a; /* mismo azul */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: #ffffff;
+    border-bottom: none;
+}
+
+.topbar-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+/* Logo */
+.topbar-logo {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+/* Links principales */
+.topbar-links a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.topbar-links a:hover {
+    background: #162c6e; /* igual que hover del sidebar */
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    color: #ffffff;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.dropdown-toggle:hover {
+    background: #162c6e;
+}
+
+/* Menú desplegable */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #1e3a8a;
+    top: 40px;
+    left: 0;
+    min-width: 180px;
+    border-radius: 4px;
+    padding: 5px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #162c6e;
+}
+
+/* Mostrar menú al pasar */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}

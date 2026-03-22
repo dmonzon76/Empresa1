@@ -1,0 +1,51 @@
+<nav class="sidebar">
+
+    <div class="sidebar-section">Sales</div>
+    <ul class="sidebar-menu">
+        <li class="sidebar-item">
+            <a href="{% url 'sales:order_list' %}">
+                <i class="bi bi-receipt"></i> Orders
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{% url 'sales:order_create' %}">
+                <i class="bi bi-cart-plus"></i> New Order
+            </a>
+        </li>
+    </ul>
+
+    <div class="sidebar-section">Inventory</div>
+    <ul class="sidebar-menu">
+        <li class="sidebar-item">
+            <a href="{% url 'inventory:stock_list' %}">
+                <i class="bi bi-boxes"></i> Stock
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{% url 'inventory:movement_add' %}">
+                <i class="bi bi-arrow-left-right"></i> New Movement
+            </a>
+        </li>
+    </ul>
+
+    <div class="sidebar-section">Accounting</div>
+    <ul class="sidebar-menu">
+        <li class="sidebar-item">
+            <a href="{% url 'accounting_html:accounts_list' %}">
+                <i class="bi bi-journal-text"></i> Chart of Accounts
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{% url 'accounting_html:journal_list' %}">
+                <i class="bi bi-pencil-square"></i> Journal Entries
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{% url 'accounting_html:journal_create' %}">
+                <i class="bi bi-plus-circle"></i> New Journal Entry
+            </a>
+        </li>
+    </ul>
+
+</nav>
+

@@ -1,0 +1,15 @@
+{% extends "bases/base.html" %}
+
+{% block content %}
+<h1>Journal Entries</h1>
+
+<ul>
+    {% for entry in object_list %}
+        <li>
+            <a href="{% url 'accounting_html:ledger' entry.pk %}">
+                Entry #{{ entry.pk }} — {{ entry.date }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

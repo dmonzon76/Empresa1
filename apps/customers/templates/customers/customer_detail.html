@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ customer.customer_number }}</title>
+</head>
+
+<body>
+    <h1>{{ customer.first_name }} {{ customer.last_name }}</h1>
+
+    <p><strong>Email:</strong> {{ customer.email }}</p>
+    <p><strong>Phone:</strong> {{ customer.phone }}</p>
+    <p><strong>Category:</strong> {{ customer.category }}</p>
+    <p><strong>Internal Number:</strong> {{ customer.customer_number }}</p>
+    <p><strong>Active:</strong> {{ customer.is_active }}</p>
+
+    <!-- the view is named "list" under the customers namespace -->
+    <a href="{% url 'customers:list' %}">Back to list</a>
+</body>
+
+</html>

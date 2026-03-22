@@ -1,0 +1,11 @@
+config
+# Python bytecode files
+__pycache__/
+*.pyc
+# Django migrations
+*/migrations/
+# Environment variables
+.env
+# VSCode settings
+.vscode/
+deploy 

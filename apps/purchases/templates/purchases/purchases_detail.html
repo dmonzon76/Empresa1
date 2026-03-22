@@ -1,0 +1,7 @@
+{% extends "purchases/base_purchases.html" %}
+{% block purchases_content %}
+<h1>Purchase {{ purchase_order.number }}</h1>
+<p>Date: {{ purchase_order.date }}</p>
+<p>Supplier: {{ purchase_order.supplier }}</p>
+<p>Total: {{ purchase_order.total_amount }}</p>
+{% endblock %}

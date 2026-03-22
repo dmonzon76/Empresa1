@@ -1,0 +1,172 @@
+/* --- TOPBAR --- */
+.topbar {
+  background: #1e3a8a;
+  padding: 12px 0;
+  color: white;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.topbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.topbar-logo,
+.topbar-links a,
+.topbar-links .dropdown-toggle {
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.topbar-links a {
+  margin-left: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.topbar-links a:hover,
+.topbar-links .dropdown-toggle:hover {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+.topbar-links .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.topbar-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  background: #1e3a8a;
+  min-width: 180px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin-top: 4px;
+  z-index: 1100;
+}
+
+.topbar-links .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.topbar-links .dropdown-menu a {
+  color: #d1d5db;
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.topbar-links .dropdown-menu a:hover {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  background: #1e3a8a;
+  width: 220px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  padding: 20px 10px;
+  color: #d1d5db;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  margin-top: 25px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #9ca3af;
+  text-transform: uppercase;
+  padding-left: 12px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar-item a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #d1d5db;
+  font-weight: 500;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.sidebar-item a:hover {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+  margin-left: 240px;
+  margin-top: 60px;
+  padding: 25px;
+  background: #f5f7fa;
+  min-height: calc(100vh - 60px);
+}
+
+/* --- KPI CARDS --- */
+.kpi-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+}
+
+.kpi-title {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* --- DASHBOARD CARDS --- */
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.dashboard-card-body {
+  padding: 1.25rem;
+}
+/* TOPBAR GENERAL */

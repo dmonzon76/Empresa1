@@ -1,0 +1,703 @@
+
+[
+  {
+    "model": "categories.productcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Fresh foods",
+      "description": "Fresh fruits, vegetables and herbs",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Fruits",
+      "description": "Seasonal fresh fruits",
+      "parent": 1
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Vegetables",
+      "description": "Fresh selected vegetables",
+      "parent": 1
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Herbs and aromatics",
+      "description": "Fresh herbs and aromatic plants",
+      "parent": 1
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Mushrooms",
+      "description": "Fresh mushrooms and fungi",
+      "parent": 1
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Meat and seafood",
+      "description": "Fresh meats, poultry and fish",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Red meat",
+      "description": "Beef and other red meats",
+      "parent": 6
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 8,
+    "fields": {
+      "name": "Poultry",
+      "description": "Chicken and other poultry products",
+      "parent": 6
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 9,
+    "fields": {
+      "name": "Pork",
+      "description": "Fresh pork cuts",
+      "parent": 6
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 10,
+    "fields": {
+      "name": "Fish",
+      "description": "Fresh fish varieties",
+      "parent": 6
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 11,
+    "fields": {
+      "name": "Seafood",
+      "description": "Shrimp, mussels and other seafood",
+      "parent": 6
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 12,
+    "fields": {
+      "name": "Bakery and pastries",
+      "description": "Bread, pastries and baked goods",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 13,
+    "fields": {
+      "name": "Bread",
+      "description": "Fresh bread and loaves",
+      "parent": 12
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 14,
+    "fields": {
+      "name": "Pastries",
+      "description": "Croissants, danishes and sweet pastries",
+      "parent": 12
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 15,
+    "fields": {
+      "name": "Cakes and doughs",
+      "description": "Cakes, pies and dough-based products",
+      "parent": 12
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 16,
+    "fields": {
+      "name": "Dairy and eggs",
+      "description": "Milk, cheese, yogurt and eggs",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 17,
+    "fields": {
+      "name": "Milk",
+      "description": "Whole, skim and plant-based milk",
+      "parent": 16
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 18,
+    "fields": {
+      "name": "Yogurt",
+      "description": "Regular, low-fat and drinkable yogurt",
+      "parent": 16
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 19,
+    "fields": {
+      "name": "Cheese",
+      "description": "Soft and hard cheeses",
+      "parent": 16
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 20,
+    "fields": {
+      "name": "Eggs",
+      "description": "White and brown eggs",
+      "parent": 16
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 21,
+    "fields": {
+      "name": "Cold cuts and sausages",
+      "description": "Ham, salami and other deli meats",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 22,
+    "fields": {
+      "name": "Cold cuts",
+      "description": "Cooked and cured ham",
+      "parent": 21
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 23,
+    "fields": {
+      "name": "Sausages",
+      "description": "Salami, mortadella and chorizo",
+      "parent": 21
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 24,
+    "fields": {
+      "name": "Pantry",
+      "description": "Dry goods, grains and canned foods",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 25,
+    "fields": {
+      "name": "Flour and mixes",
+      "description": "Flour and baking mixes",
+      "parent": 24
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 26,
+    "fields": {
+      "name": "Rice and legumes",
+      "description": "Rice, lentils and beans",
+      "parent": 24
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 27,
+    "fields": {
+      "name": "Pasta",
+      "description": "Dry pasta varieties",
+      "parent": 24
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 28,
+    "fields": {
+      "name": "Canned foods",
+      "description": "Tuna, corn and tomato products",
+      "parent": 24
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 29,
+    "fields": {
+      "name": "Oils and vinegars",
+      "description": "Sunflower, olive oil and vinegars",
+      "parent": 24
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 30,
+    "fields": {
+      "name": "Non-alcoholic beverages",
+      "description": "Sodas, juices, water and energy drinks",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 31,
+    "fields": {
+      "name": "Sodas",
+      "description": "Carbonated soft drinks",
+      "parent": 30
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 32,
+    "fields": {
+      "name": "Water",
+      "description": "Still and sparkling water",
+      "parent": 30
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 33,
+    "fields": {
+      "name": "Juices",
+      "description": "Powdered and ready-to-drink juices",
+      "parent": 30
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 34,
+    "fields": {
+      "name": "Energy drinks",
+      "description": "Energy and sports drinks",
+      "parent": 30
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 35,
+    "fields": {
+      "name": "Alcoholic beverages",
+      "description": "Wine, beer and spirits",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 36,
+    "fields": {
+      "name": "Wine",
+      "description": "Red, white and sparkling wines",
+      "parent": 35
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 37,
+    "fields": {
+      "name": "Beer",
+      "description": "Lager, stout and craft beers",
+      "parent": 35
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 38,
+    "fields": {
+      "name": "Spirits",
+      "description": "Vodka, rum and liqueurs",
+      "parent": 35
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 39,
+    "fields": {
+      "name": "Frozen foods",
+      "description": "Frozen vegetables, meals and ice cream",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 40,
+    "fields": {
+      "name": "Frozen vegetables",
+      "description": "Peas, spinach and mixed vegetables",
+      "parent": 39
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 41,
+    "fields": {
+      "name": "Ready meals",
+      "description": "Frozen pizzas, nuggets and meals",
+      "parent": 39
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 42,
+    "fields": {
+      "name": "Ice cream",
+      "description": "Ice cream tubs and popsicles",
+      "parent": 39
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 43,
+    "fields": {
+      "name": "Snacks and candy",
+      "description": "Chips, chocolates and sweets",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 44,
+    "fields": {
+      "name": "Salty snacks",
+      "description": "Chips and salty treats",
+      "parent": 43
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 45,
+    "fields": {
+      "name": "Chocolate",
+      "description": "Chocolate bars and bonbons",
+      "parent": 43
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 46,
+    "fields": {
+      "name": "Candy",
+      "description": "Hard and chewy candies",
+      "parent": 43
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 47,
+    "fields": {
+      "name": "Cleaning products",
+      "description": "Household and surface cleaners",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 48,
+    "fields": {
+      "name": "Laundry",
+      "description": "Detergents and softeners",
+      "parent": 47
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 49,
+    "fields": {
+      "name": "Kitchen cleaners",
+      "description": "Dish soap and degreasers",
+      "parent": 47
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 50,
+    "fields": {
+      "name": "Bathroom cleaners",
+      "description": "Disinfectants and toilet cleaners",
+      "parent": 47
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 51,
+    "fields": {
+      "name": "Surface cleaners",
+      "description": "Multipurpose and glass cleaners",
+      "parent": 47
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 52,
+    "fields": {
+      "name": "Personal care",
+      "description": "Hair, body and oral care",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 53,
+    "fields": {
+      "name": "Hair care",
+      "description": "Shampoo and conditioner",
+      "parent": 52
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 54,
+    "fields": {
+      "name": "Body care",
+      "description": "Soap and moisturizers",
+      "parent": 52
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 55,
+    "fields": {
+      "name": "Oral care",
+      "description": "Toothpaste and mouthwash",
+      "parent": 52
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 56,
+    "fields": {
+      "name": "Shaving",
+      "description": "Razors and shaving foam",
+      "parent": 52
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 57,
+    "fields": {
+      "name": "Cosmetics and fragrances",
+      "description": "Makeup, creams and perfumes",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 58,
+    "fields": {
+      "name": "Makeup",
+      "description": "Foundation, lipstick and more",
+      "parent": 57
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 59,
+    "fields": {
+      "name": "Fragrances",
+      "description": "Perfumes and colognes",
+      "parent": 57
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 60,
+    "fields": {
+      "name": "Facial creams",
+      "description": "Hydrating and anti-aging creams",
+      "parent": 57
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 61,
+    "fields": {
+      "name": "Baby products",
+      "description": "Diapers, wipes and baby food",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 62,
+    "fields": {
+      "name": "Diapers",
+      "description": "All diaper sizes",
+      "parent": 61
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 63,
+    "fields": {
+      "name": "Baby wipes",
+      "description": "Wet wipes for babies",
+      "parent": 61
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 64,
+    "fields": {
+      "name": "Baby food",
+      "description": "Purees and cereals",
+      "parent": 61
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 65,
+    "fields": {
+      "name": "Pet products",
+      "description": "Food and accessories for pets",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 66,
+    "fields": {
+      "name": "Pet food",
+      "description": "Dog and cat food",
+      "parent": 65
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 67,
+    "fields": {
+      "name": "Pet accessories",
+      "description": "Leashes, bowls and toys",
+      "parent": 65
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 68,
+    "fields": {
+      "name": "Litter and hygiene",
+      "description": "Cat litter and cleaning products",
+      "parent": 65
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 69,
+    "fields": {
+      "name": "Home and kitchen",
+      "description": "Utensils, candles and small appliances",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 70,
+    "fields": {
+      "name": "Utensils",
+      "description": "Kitchen tools and accessories",
+      "parent": 69
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 71,
+    "fields": {
+      "name": "Home accessories",
+      "description": "Candles, batteries and small items",
+      "parent": 69
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 72,
+    "fields": {
+      "name": "Small appliances",
+      "description": "Kettles, blenders and toasters",
+      "parent": 69
+    }
+  },
+
+  {
+    "model": "categories.productcategory",
+    "pk": 73,
+    "fields": {
+      "name": "Stationery",
+      "description": "Notebooks, pens and envelopes",
+      "parent": null
+    }
+  },
+  {
+    "model": "categories.productcategory",
+    "pk": 74,
+    "fields": {
+      "name": "Notebooks",
+      "description": "All notebook types",
+      "parent": 73
+    }
+  },
+    {
+        "model": "categories.productcategory",
+        "pk": 75,
+        "fields": {
+        "name": "Writing instruments",
+        "description": "Pens, pencils and markers",
+        "parent": 73
+        }
+    },
+    {
+        "model": "categories.productcategory",
+        "pk": 76,
+        "fields": {
+        "name": "Office supplies",
+        "description": "Envelopes, folders and more",
+        "parent": 73
+        }
+    }
+]
