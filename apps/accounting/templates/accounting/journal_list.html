@@ -1,4 +1,4 @@
-{% extends "bases/base.html" %}
+{% extends "core/bases/base.html" %}
 
 {% block content %}
 <h1>Journal Entries</h1>
@@ -6,9 +6,22 @@
 <ul>
     {% for entry in object_list %}
         <li>
-            <a href="{% url 'accounting_html:ledger' entry.pk %}">
-                Entry #{{ entry.pk }} — {{ entry.date }}
-            </a>
+            <strong>Entry #{{ entry.pk }} — {{ entry.date }}</strong>
+
+            {% if entry.lines.exists %}
+                <ul>
+                    {% for line in entry.lines.all %}
+                        <li>
+                            Account: {{ line.account.code }} — {{ line.account.name }}
+                            <a href="{% url 'accounting:account_ledger' line.account.pk %}">
+                                See Account Ledger
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <em>No accounting lines</em>
+            {% endif %}
         </li>
     {% endfor %}
 </ul>

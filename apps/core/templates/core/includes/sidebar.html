@@ -1,0 +1,43 @@
+<<aside class="sidebar">
+
+    <div class="sidebar-section">Modules</div>
+    <ul class="sidebar-menu">
+
+        <li class="sidebar-item">
+            <a href="{% url 'accounting:dashboard' %}">
+                <i class="bi bi-cash-stack"></i>
+                Accounting
+            </a>
+        </li>
+
+        <li class="sidebar-item">
+            <a href="{% url 'inventory:list' %}">
+                <i class="bi bi-boxes"></i>
+                Inventory
+            </a>
+        </li>
+
+        <li class="sidebar-item">
+            <a href="{% url 'reports:dashboard' %}">
+                <i class="bi bi-graph-up"></i>
+                Reports
+            </a>
+        </li>
+
+        <li class="sidebar-item">
+            <a href="{% url 'sales:list' %}">
+                <i class="bi bi-cart-check"></i>
+                Sales
+            </a>
+        </li>
+
+        <li class="sidebar-item">
+            <a href="{% url 'suppliers:list' %}">
+                <i class="bi bi-truck"></i>
+                Suppliers
+            </a>
+        </li>
+
+    </ul>
+
+</aside>

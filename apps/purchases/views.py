@@ -31,4 +31,5 @@ class PurchaseOrderDeleteView(View):
     def post(self, request, pk):
         purchase_order = get_object_or_404(PurchaseOrder, pk=pk)
         purchase_order.delete()
-        return redirect(reverse("purchases_html:list"))
+        return redirect(reverse("purchases:list"))
+

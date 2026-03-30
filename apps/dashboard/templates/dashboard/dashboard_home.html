@@ -1,142 +1,147 @@
-{% extends "bases/base.html" %}
+{% extends "core/bases/base.html" %}
 {% load static %}
+
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
 {% endblock %}
+
 {% block content %}
-    <!-- HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="fw-bold" style="font-size: 1.9rem; color:#1e293b;">Dashboard</h1>
-    </div>
-        <p style="color: blue; font-size: 20px;"></p>
-        <p style="color: blue; font-size: 20px;"></p>
-    <!-- KPI ROW 1 -->
-    <div class="row g-4">
-        <!-- ACTIVE CUSTOMERS -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Active Clients</div>
-                <div class="kpi-value" data-kpi="{{ active_customers }}">0</div>
-            </div>
-        </div>
-        <!-- TOTAL PRODUCTS -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Products</div>
-                <div class="kpi-value" data-kpi="{{ total_products }}">0</div>
-            </div>
-        </div>
-        <!-- SALES TODAY -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Sales Today</div>
-                <div class="kpi-value" id="kpi_sales_today">{{ sales_today }}</div>
-            </div>
-        </div>
-        <!-- SALES THIS MONTH -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Sales This Month</div>
-                <div class="kpi-value" id="kpi_sales_month">{{ sales_month }}</div>
-            </div>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold" style="font-size: 1.9rem; color:#1e293b;">Dashboard</h1>
+</div>
+
+<!-- KPI ROW 1 -->
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Active Clients</div>
+            <div class="kpi-value" data-kpi="{{ active_customers }}">0</div>
         </div>
     </div>
-    <!-- KPI ROW 2 -->
-    <div class="row g-4 mt-1">
-        <!-- TOTAL ORDERS -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Total Orders</div>
-                <div class="kpi-value" id="kpi_sales_count">{{ sales_count }}</div>
-            </div>
-        </div>
-        <!-- AVERAGE TICKET -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Average Ticket</div>
-                <div class="kpi-value" id="kpi_ticket_avg">{{ ticket_avg }}</div>
-            </div>
-        </div>
-        <!-- LOW STOCK -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Low Stock</div>
-                <div class="kpi-value">{{ low_stock_count }}</div>
-            </div>
-        </div>
-        <!-- TOTAL STOCK -->
-        <div class="col-md-3">
-            <div class="kpi-card shadow-sm">
-                <div class="kpi-title">Total Stock</div>
-                <div class="kpi-value">{{ total_stock }}</div>
-            </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Products</div>
+            <div class="kpi-value" data-kpi="{{ total_products }}">0</div>
         </div>
     </div>
-    <!-- CHARTS + TABLE -->
-    <div class="row g-4 mt-4">
-        <!-- CUSTOMERS BY CATEGORY -->
-        <div class="col-md-6">
-            <div class="dashboard-card shadow-sm">
-                <div class="dashboard-card-header">
-                    <div class="dashboard-card-title">Customers by Category</div>
-                </div>
-                <div class="dashboard-card-body">
-                    <canvas id="chartCustomersByCategory"></canvas>
-                </div>
-            </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Sales Today</div>
+            <div class="kpi-value" id="kpi_sales_today">{{ sales_today }}</div>
         </div>
-        <!-- LATEST CUSTOMERS -->
-        <div class="col-md-6">
-            <div class="dashboard-card shadow-sm">
-                <div class="dashboard-card-header">
-                    <div class="dashboard-card-title">Latest Customers</div>
-                </div>
-                <div class="dashboard-card-body">
-                    <table class="table table-sm">
-                        <tbody>
-                            {% for c in customers %}
-                                <tr>
-                                    <td>{{ c.name }} {{ c.last_name }}</td>
-                                    <td>{{ c.email }}</td>
-                                    <td>{{ c.phone }}</td>
-                                    <td>
-                                        <a href="{% url 'customers:edit' c.id %}"class="btn btn-sm btn-secondary">Edit</a>
-                                        <a href="{% url 'customers:delete' c.id %}"class="btn btn-sm btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                            {% empty %}
-                                <tr>
-                                    <td colspan="4">No customers found.</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Sales This Month</div>
+            <div class="kpi-value" id="kpi_sales_month">{{ sales_month }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- KPI ROW 2 -->
+<div class="row g-4 mt-1">
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Total Orders</div>
+            <div class="kpi-value" id="kpi_sales_count">{{ sales_count }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Average Ticket</div>
+            <div class="kpi-value" id="kpi_ticket_avg">{{ ticket_avg }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Low Stock</div>
+            <div class="kpi-value">{{ low_stock_count }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Total Stock</div>
+            <div class="kpi-value">{{ total_stock }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- CHARTS + CUSTOMERS -->
+<div class="row g-4 mt-4">
+    <!-- CUSTOMERS BY CATEGORY -->
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Customers by Category</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartCustomersByCategory"></canvas>
             </div>
         </div>
     </div>
-    <!-- INVENTORY MOVEMENTS -->
-    <div class="row g-4 mt-1">
-        <div class="col-md-12">
-            <div class="dashboard-card shadow-sm">
-                <div class="dashboard-card-header">
-                    <div class="dashboard-card-title">Inventory Movements (Monthly)</div>
-                </div>
-                <div class="dashboard-card-body">
-                    <canvas id="inventoryMonthlyChart"></canvas>
-                </div>
+
+    <!-- LATEST CUSTOMERS -->
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Latest Customers</div>
+            </div>
+            <div class="dashboard-card-body">
+                <table class="table table-sm">
+                    <tbody>
+                        {% for c in customers %}
+                            <tr>
+                                <td>{{ c.name }} {{ c.last_name }}</td>
+                                <td>{{ c.email }}</td>
+                                <td>{{ c.phone }}</td>
+                                <td>
+                                    <a href="{% url 'customers:edit' c.id %}" class="btn btn-sm btn-secondary">Edit</a>
+                                    <a href="{% url 'customers:delete' c.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">No customers found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+
+<!-- INVENTORY MOVEMENTS -->
+<div class="row g-4 mt-1">
+    <div class="col-md-12">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Inventory Movements (Monthly)</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="inventoryMonthlyChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
 {% block extra_js %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-    window.dashboardData = {
-        categories_labels: {{ categories_labels | safe }},
-        categories_counts: {{ categories_counts | safe }},
-        inventory_monthly: {{ inventory_monthly | safe }},
-    };
-    </script>
-    <script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+window.dashboardData = {
+    categories_labels: {{ categories_labels | safe }},
+    categories_counts: {{ categories_counts | safe }},
+    inventory_monthly: {{ inventory_monthly | safe }},
+};
+</script>
+<script src="{% static 'dashboard/js/dashboard.js' %}"></script>
 {% endblock %}

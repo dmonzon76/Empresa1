@@ -1,0 +1,13 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Accounting</h1>
+    <p>Bienvenido al módulo de contabilidad.</p>
+
+    <ul>
+        <li><a href="{% url 'accounting:accounts_list' %}">Accounts</a></li>
+        <li><a href="{% url 'accounting:journal_list' %}">Journal Entries</a></li>
+    </ul>
+</div>
+{% endblock %}

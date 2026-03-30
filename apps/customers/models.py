@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from .utils import generate_customer_number
-
+from django.contrib.contenttypes.models import ContentType
+from apps.addresses.models import AddressAssignment
 
 class Customer(models.Model):
     # Basic identity
@@ -45,4 +46,15 @@ class Customer(models.Model):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
-    
+
+    def addresses(self):
+        return AddressAssignment.objects.filter(
+            content_type=ContentType.objects.get_for_model(Customer),
+            object_id=self.id
+        )
+
+    def primary_address(self, type_code=None):
+        qs = self.addresses()
+        if type_code:
+            qs = qs.filter(address_type__code=type_code)
+        return qs.filter(is_primary=True).first()

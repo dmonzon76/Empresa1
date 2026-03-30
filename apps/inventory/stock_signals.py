@@ -33,7 +33,4 @@ def reverse_movement_on_delete(sender, instance, **kwargs):
         item.quantity += instance.quantity
 
     elif instance.movement_type == InventoryMovement.ADJUST:
-        return  # No revertimos ajustes
-
-    item.save()
-
+        return  # No revertimos ajuste
