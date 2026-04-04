@@ -1,0 +1,24 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Supplier: {{ supplier.display_name }}</h2>
+</div>
+
+<div class="dashboard-card mb-4">
+    <div class="dashboard-card-header">
+        <span class="dashboard-card-title">Supplier Information</span>
+    </div>
+
+    <div class="dashboard-card-body">
+        <p><strong>Name:</strong> {{ supplier.display_name }}</p>
+        <p><strong>Type:</strong> {{ supplier.get_supplier_type_display }}</p>
+        <p><strong>Phone:</strong> {{ supplier.phone }}</p>
+        <p><strong>Email:</strong> {{ supplier.email }}</p>
+        <p><strong>Address:</strong> {{ supplier.address }}</p>
+
+        <a href="{% url 'suppliers:edit' supplier.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'suppliers:delete' supplier.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </div>
+</div>
+{% endblock %}

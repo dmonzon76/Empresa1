@@ -40,3 +40,10 @@ class InventoryMovementCreateView(CreateView):
             "inventory:stock_detail",
             args=[self.object.product.inventoryitem.id]
         )
+from django.shortcuts import render
+
+def dashboard(request):
+    return render(request, "placeholders/module_placeholder.html", {
+        "module_name": "Inventory",
+        "description": "Stock levels, warehouses, and product tracking."
+    })

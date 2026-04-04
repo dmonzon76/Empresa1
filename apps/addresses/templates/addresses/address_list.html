@@ -1,38 +1,39 @@
-
-
 {% extends "core/bases/base.html" %}
 
 {% block content %}
 <div class="dashboard-header">
-    <h2 class="dashboard-title">Customer Categories</h2>
+    <h2 class="dashboard-title">Addresses</h2>
 </div>
 
 <div class="dashboard-card">
     <div class="dashboard-card-header d-flex justify-content-between">
         <span class="dashboard-card-title">List</span>
-        <a href="{% url 'categories:customers_create' %}" class="btn btn-primary btn-sm">New Category</a>
+        <a href="{% url 'addresses:address_create' %}" class="btn btn-primary btn-sm">New Address</a>
     </div>
 
     <div class="dashboard-card-body">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>Country</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {% for category in object_list %}
+                {% for address in object_list %}
                 <tr>
-                    <td>{{ category.name }}</td>
+                    <td>{{ address.street }}</td>
+                    <td>{{ address.city }}</td>
+                    <td>{{ address.country }}</td>
                     <td>
-                        <a href="{% url 'categories:customers_edit' category.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        <a href="{% url 'categories:customers_delete' category.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        <a href="{% url 'addresses:address_detail' address.id %}" class="btn btn-sm btn-outline-primary">View</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="2" class="text-center text-muted">No categories found.</td>
+                    <td colspan="4" class="text-center text-muted">No addresses found.</td>
                 </tr>
                 {% endfor %}
             </tbody>

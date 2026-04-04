@@ -1,0 +1,52 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Address Assignments</h2>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-header d-flex justify-content-between">
+        <span class="dashboard-card-title">List</span>
+        <a href="{% url 'addresses:assignment_create' %}" class="btn btn-primary btn-sm">New Assignment</a>
+    </div>
+
+    <div class="dashboard-card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Entity</th>
+                    <th>Address</th>
+                    <th>Type</th>
+                    <th>Primary</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in object_list %}
+                <tr>
+                    <td>{{ assignment.entity }}</td>
+                    <td>{{ assignment.address }}</td>
+                    <td>{{ assignment.address_type }}</td>
+                    <td>
+                        {% if assignment.is_primary %}
+                            <span class="badge bg-success">Yes</span>
+                        {% else %}
+                            <span class="badge bg-secondary">No</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'addresses:assignment_edit' assignment.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'addresses:assignment_delete' assignment.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No assignments found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -2,17 +2,17 @@
 
 {% block content %}
 <div class="dashboard-header">
-    <h2 class="dashboard-title">Delete Item</h2>
+    <h2 class="dashboard-title">Delete Address Type</h2>
 </div>
 
 <div class="dashboard-card">
     <div class="dashboard-card-body">
-        <p>¿You probably want to delete this item?</p>
+        <p>Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
 
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Delete</button>
-            <a href="{% url 'sales:order_detail' object.order.id %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'addresses:type_list' %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>

@@ -1,0 +1,21 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Address Details</h2>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-body">
+        <p><strong>Street:</strong> {{ address.street }}</p>
+        <p><strong>City:</strong> {{ address.city }}</p>
+        <p><strong>State:</strong> {{ address.state }}</p>
+        <p><strong>Country:</strong> {{ address.country }}</p>
+        <p><strong>Postal Code:</strong> {{ address.postal_code }}</p>
+        <p><strong>Notes:</strong> {{ address.notes }}</p>
+
+        <a href="{% url 'addresses:address_edit' address.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'addresses:address_delete' address.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </div>
+</div>
+{% endblock %}

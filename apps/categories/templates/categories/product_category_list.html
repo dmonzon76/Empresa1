@@ -1,16 +1,14 @@
-
-
 {% extends "core/bases/base.html" %}
 
 {% block content %}
 <div class="dashboard-header">
-    <h2 class="dashboard-title">Customer Categories</h2>
+    <h2 class="dashboard-title">Product Categories</h2>
 </div>
 
 <div class="dashboard-card">
     <div class="dashboard-card-header d-flex justify-content-between">
         <span class="dashboard-card-title">List</span>
-        <a href="{% url 'categories:customers_create' %}" class="btn btn-primary btn-sm">New Category</a>
+        <a href="{% url 'categories:products_create' %}" class="btn btn-primary btn-sm">New Category</a>
     </div>
 
     <div class="dashboard-card-body">
@@ -26,8 +24,8 @@
                 <tr>
                     <td>{{ category.name }}</td>
                     <td>
-                        <a href="{% url 'categories:customers_edit' category.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        <a href="{% url 'categories:customers_delete' category.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        <a href="{% url 'categories:products_edit' category.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'categories:products_delete' category.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
                     </td>
                 </tr>
                 {% empty %}

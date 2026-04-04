@@ -1,4 +1,4 @@
-<<aside class="sidebar">
+<aside class="sidebar">
 
     <div class="sidebar-section">Modules</div>
     <ul class="sidebar-menu">
@@ -11,7 +11,7 @@
         </li>
 
         <li class="sidebar-item">
-            <a href="{% url 'inventory:list' %}">
+            <a href="{% url 'inventory:stock_list' %}">
                 <i class="bi bi-boxes"></i>
                 Inventory
             </a>
@@ -25,11 +25,12 @@
         </li>
 
         <li class="sidebar-item">
-            <a href="{% url 'sales:list' %}">
+            <a href="{% url 'sales:order_list' %}">
                 <i class="bi bi-cart-check"></i>
                 Sales
             </a>
         </li>
+
 
         <li class="sidebar-item">
             <a href="{% url 'suppliers:list' %}">

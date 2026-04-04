@@ -1,80 +1,75 @@
-<h1>Address Dashboard</h1>
+{% extends "core/bases/base.html" %}
 
-<form method="get" class="filters">
-    <label>Type:</label>
-    <select name="type">
-        <option value="">All</option>
-        {% for t in types %}
-        <option value="{{ t.code }}">{{ t.name }}</option>
-        {% endfor %}
-    </select>
-
-    <label>Country:</label>
-    <input type="text" name="country" placeholder="Argentina, Chile...">
-
-    <label>Entity:</label>
-    <select name="entity">
-        <option value="">All</option>
-        {% for e in entities %}
-        <option value="{{ e.model }}">{{ e.model|title }}</option>
-        {% endfor %}
-    </select>
-
-    <label>Primary:</label>
-    <select name="primary">
-        <option value="">All</option>
-        <option value="1">Only primary</option>
-    </select>
-
-    <button type="submit">Filter</button>
-</form>
-
-<table>
-    <thead>
-        <tr>
-            <th><a href="?order=entity">Entity</a></th>
-            <th><a href="?order=address_type">Type</a></th>
-            <th>Address</th>
-            <th><a href="?order=address__city">City</a></th>
-            <th><a href="?order=address__country">Country</a></th>
-            <th><a href="?order=is_primary">Primary</a></th>
-            <th><a href="?order=created_at">Created</a></th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        {% for a in assignments %}
-        <tr>
-            <td>{{ a.entity }}</td>
-            <td>{{ a.address_type.name }}</td>
-            <td>{{ a.address.street }}</td>
-            <td>{{ a.address.city }}</td>
-            <td>{{ a.address.country }}</td>
-            <td>{{ a.is_primary|yesno:"Yes,No" }}</td>
-            <td>{{ a.created_at }}</td>
-            <td>
-                <a href="/admin/addresses/addressassignment/{{ a.id }}/change/">Edit</a>
-                |
-                <a href="/admin/addresses/address/{{ a.address.id }}/change/">View address</a>
-                |
-                <a href="/admin/{{ a.content_type.app_label }}/{{ a.content_type.model }}/{{ a.object_id }}/change/">
-                    View entity
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<div class="pagination">
-    {% if assignments.has_previous %}
-        <a href="?page={{ assignments.previous_page_number }}">Previous</a>
-    {% endif %}
-
-    <span>Page {{ assignments.number }} of {{ assignments.paginator.num_pages }}</span>
-
-    {% if assignments.has_next %}
-        <a href="?page={{ assignments.next_page_number }}">Next</a>
-    {% endif %}
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Addresses Module</h2>
 </div>
+
+<div class="row mb-4">
+
+    <div class="col-md-4">
+        <div class="dashboard-card text-center">
+            <div class="dashboard-card-header">Addresses</div>
+            <div class="dashboard-card-body">
+                <h3>{{ address_count }}</h3>
+                <a href="{% url 'addresses:address_list' %}" class="btn btn-outline-primary btn-sm">View List</a>
+                <a href="{% url 'addresses:address_create' %}" class="btn btn-primary btn-sm">New Address</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="dashboard-card text-center">
+            <div class="dashboard-card-header">Address Types</div>
+            <div class="dashboard-card-body">
+                <h3>{{ type_count }}</h3>
+                <a href="{% url 'addresses:type_list' %}" class="btn btn-outline-primary btn-sm">View Types</a>
+                <a href="{% url 'addresses:type_create' %}" class="btn btn-primary btn-sm">New Type</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="dashboard-card text-center">
+            <div class="dashboard-card-header">Assignments</div>
+            <div class="dashboard-card-body">
+                <h3>{{ assignment_count }}</h3>
+                <a href="{% url 'addresses:assignment_list' %}" class="btn btn-outline-primary btn-sm">View Assignments</a>
+                <a href="{% url 'addresses:assignment_create' %}" class="btn btn-primary btn-sm">New Assignment</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-header">
+        <span class="dashboard-card-title">Recent Addresses</span>
+    </div>
+    <div class="dashboard-card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in recent_addresses %}
+                <tr>
+                    <td>{{ a.street }}</td>
+                    <td>{{ a.city }}</td>
+                    <td>{{ a.country }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">No addresses yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

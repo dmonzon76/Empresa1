@@ -4,7 +4,7 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from .models import Supplier
 from .forms import SupplierForm
-
+from django.shortcuts import render
 
 class SupplierListView(ListView):
     model = Supplier
@@ -37,3 +37,11 @@ class SupplierDeleteView(DeleteView):
     template_name = "suppliers/suppliers_confirm_delete.html"
     context_object_name = "supplier"
     success_url = reverse_lazy("suppliers:list")
+
+
+
+def dashboard(request):
+    return render(request, "placeholders/module_placeholder.html", {
+        "module_name": "Suppliers",
+        "description": "Vendor management, contracts, and purchasing."
+    })

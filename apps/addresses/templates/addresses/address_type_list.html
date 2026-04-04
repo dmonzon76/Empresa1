@@ -1,0 +1,46 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Address Types</h2>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-header d-flex justify-content-between">
+        <span class="dashboard-card-title">List</span>
+        <a href="{% url 'addresses:type_create' %}" class="btn btn-primary btn-sm">New Address Type</a>
+    </div>
+
+    <div class="dashboard-card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Active</th>
+                    <th>Unique per Entity</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type in object_list %}
+                <tr>
+                    <td>{{ type.name }}</td>
+                    <td>{{ type.code }}</td>
+                    <td>{{ type.is_active|yesno:"Yes,No" }}</td>
+                    <td>{{ type.is_unique_per_entity|yesno:"Yes,No" }}</td>
+                    <td>
+                        <a href="{% url 'addresses:type_edit' type.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'addresses:type_delete' type.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No types found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

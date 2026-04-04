@@ -1,0 +1,45 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2 class="dashboard-title">Suppliers</h2>
+</div>
+
+<div class="dashboard-card">
+    <div class="dashboard-card-header d-flex justify-content-between">
+        <span class="dashboard-card-title">List</span>
+        <a href="{% url 'suppliers:create' %}" class="btn btn-primary btn-sm">New Supplier</a>
+    </div>
+
+    <div class="dashboard-card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for supplier in suppliers %}
+                <tr>
+                    <td>{{ supplier.display_name }}</td>
+                    <td>{{ supplier.get_supplier_type_display }}</td>
+                    <td>{{ supplier.phone }}</td>
+                    <td>{{ supplier.email }}</td>
+                    <td>
+                        <a href="{% url 'suppliers:detail' supplier.id %}" class="btn btn-sm btn-outline-primary">View</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No suppliers registered.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
