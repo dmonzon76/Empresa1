@@ -21,3 +21,4 @@ class CustomerForm(forms.ModelForm):
             "category": forms.Select(attrs={"class": "form-select"}),
             "is_active": forms.CheckboxInput(attrs={"class": "form-check-input"}),
         }
+        

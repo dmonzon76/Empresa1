@@ -1,6 +1,7 @@
 {% extends "core/bases/base.html" %}
 
 {% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
 <div class="dashboard-header">
     <h2 class="dashboard-title">
         {% if form.instance.pk %}Edit Supplier{% else %}New Supplier{% endif %}
@@ -9,9 +10,39 @@
 
 <div class="dashboard-card">
     <div class="dashboard-card-body">
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h3>Addresses</h3>
+
+    {{ formset.management_form }}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Address</th>
+                <th>Primary</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in formset %}
+            <tr>
+                <td>{{ f.address_type }}</td>
+                <td>{{ f.address }}</td>
+                <td>{{ f.is_primary }}</td>
+                <td>{{ f.DELETE }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
 
             <button type="submit" class="btn btn-primary">
                 {% if form.instance.pk %}Save Changes{% else %}Create Supplier{% endif %}

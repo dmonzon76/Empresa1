@@ -15,4 +15,7 @@ urlpatterns = [
     path("stock/", InventoryListView.as_view(), name="stock_list"),
     path("stock/<int:pk>/", InventoryDetailView.as_view(), name="stock_detail"),
     path("movement/new/", InventoryMovementCreateView.as_view(), name="movement_create"),
+    path("movement/new/<int:item_id>/",InventoryMovementCreateView.as_view(),name="movement_create"
+),
+
 ]

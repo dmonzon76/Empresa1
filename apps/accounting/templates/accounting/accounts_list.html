@@ -1,11 +1,45 @@
 {% extends "core/bases/base.html" %}
 
 {% block content %}
-<h1>Chart of Accounts</h1>
+<div class="container mt-4">
+        <a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
+        <a href="{% url 'accounting:account_ledger' account.pk %}">
+            <button class="btn btn-sm btn-outline-primary mb-3">See Ledger</button>
+</a>
 
-<ul>
-    {% for account in object_list %}
-        <li>{{ account.code }} — {{ account.name }}</li>
-    {% endfor %}
-</ul>
+    <h1>Chart of Accounts</h1>
+
+    <table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Ledger</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for account in accounts %}
+        <tr>
+            <td>{{ account.code }}</td>
+            <td>{{ account.name }}</td>
+            <td>
+                {{ account.total_debit|default:0|floatformat:2 }}
+                -
+                {{ account.total_credit|default:0|floatformat:2 }}
+                =
+                {{ account.total_debit|default:0|floatformat:2|add:"-"|add:account.total_credit|default:0 }}
+            </td>
+            <td>
+                <a href="{% url 'accounting:account_ledger' account.pk %}"
+                   class="btn btn-sm btn-outline-primary">
+                    See Ledger
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
 {% endblock %}

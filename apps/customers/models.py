@@ -1,19 +1,16 @@
 from django.db import models
 from django.utils import timezone
-from .utils import generate_customer_number
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericRelation
 from apps.addresses.models import AddressAssignment
+from .utils import generate_customer_number
 
 class Customer(models.Model):
-    # Basic identity
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
 
-    # Dynamic category
     category = models.ForeignKey(
-        # the category model lives in the categories app, not customers
         "categories.CustomerCategory",
         on_delete=models.SET_NULL,
         null=True,
@@ -21,19 +18,20 @@ class Customer(models.Model):
         related_name="customers"
     )
 
-    # Internal identifier
     customer_number = models.CharField(
         max_length=20,
         unique=True,
         editable=False
     )
 
-    # Metadata
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-
-    # State
     is_active = models.BooleanField(default=True)
+
+    address_assignments = GenericRelation(
+        AddressAssignment,
+        related_query_name="customer"
+    )
 
     def save(self, *args, **kwargs):
         if not self.customer_number:
@@ -47,14 +45,12 @@ class Customer(models.Model):
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
 
+    @property
     def addresses(self):
-        return AddressAssignment.objects.filter(
-            content_type=ContentType.objects.get_for_model(Customer),
-            object_id=self.id
-        )
+        return self.address_assignments.select_related("address", "address_type")
 
     def primary_address(self, type_code=None):
-        qs = self.addresses()
+        qs = self.addresses
         if type_code:
             qs = qs.filter(address_type__code=type_code)
         return qs.filter(is_primary=True).first()

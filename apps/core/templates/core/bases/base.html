@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     {% include "core/includes/navbar.html" %}
 
 
@@ -23,7 +22,8 @@
         {% include "core/includes/sidebar.html" %}
 
         <main class="main-content">
-            {% block content %}{% endblock %}
+            {% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>{% endblock %}
         </main>
 
     </div>

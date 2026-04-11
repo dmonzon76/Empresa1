@@ -14,5 +14,20 @@ class Address(models.Model):
     class Meta:
         ordering = ["country", "city", "street"]
 
-    def __str__(self):
-        return f"{self.street}, {self.city}"
+        def __str__(self):
+            return self.full_address
+
+
+
+    @property
+    def full_address(self):
+        parts = [
+            self.street,
+            self.city,
+            self.state,
+            self.country,
+            self.postal_code,
+        ]
+        # Filtra None o strings vacíos
+        parts = [p for p in parts if p]
+        return ", ".join(parts)

@@ -3,6 +3,7 @@
 {% block title %}Customers{% endblock %}
 
 {% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
 <div class="module-container">
     <div class="module-header">
         <h2>Customers</h2>
@@ -13,6 +14,7 @@
         <thead>
             <tr>
                 <th>full_name</th>
+                <th>Address</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th class="actions-col">Actions</th>
@@ -22,7 +24,15 @@
         <tbody>
             {% for c in customers %}
             <tr>
-                <td>{{ c.name }} {{ c.last_name }}</td>
+                <td>{{ c.first_name }} {{ c.last_name }}</td>
+                <td>
+                    {% with address=c.address_assignments.first %}
+                        {% if address %}
+                            {{ address.address.street }}, {{ address.address.city }}
+                        {% else %}
+                            No address
+                        {% endif %}
+                    {% endwith %}
                 <td>{{ c.email }}</td>
                 <td>{{ c.phone }}</td>
                 <td class="actions">
@@ -39,3 +49,46 @@
     </table>
 </div>
 {% endblock %}
+
+<h3>Addresses</h3>
+
+{{ formset.management_form }}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Addresses</th>
+            <th>Primary</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for f in formset %}
+        <tr>
+            <td>{{ f.address_type }}</td>
+            <td>
+    {% if c.address_assignments.all %}
+        {% for a in c.address_assignments.all %}
+            <div>
+                <strong>{{ a.address_type.name }}:</strong>
+                {{ a.address.street }}, {{ a.address.city }}
+                {% if a.is_primary %}
+                    <span class="badge bg-success">Primary</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <span class="text-muted">No addresses</span>
+    {% endif %}
+</td>
+
+            <td>{{ f.is_primary }}</td>
+            <td>{{ f.DELETE }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary">Save</button>
+<a href="{% url 'customers:list' %}" class="btn btn-secondary">Cancel</a>

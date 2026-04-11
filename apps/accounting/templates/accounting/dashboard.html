@@ -1,0 +1,101 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
+<div class="container mt-4">
+<a href="#" onclick="history.back(); return false;" class="btn btn-outline-secondary mb-3">← Back</a>
+    <h1 class="mb-4">Accounting Dashboard</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>Total Accounts</h5>
+                    <h2>{{ total_accounts }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>Total Journal Entries</h5>
+                    <h2>{{ total_entries }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>Debit (This Month)</h5>
+                    <h2>{{ month_debit }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5>Credit (This Month)</h5>
+                    <h2>{{ month_credit }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a href="{% url 'accounting:journal_list' %}" class="btn btn-primary">Journal Entries</a>
+        <a href="{% url 'accounting:accounts_list' %}" class="btn btn-secondary">Chart of Accounts</a>
+        <a href="{% url 'accounting:journal_create' %}" class="btn btn-success">New Journal Entry</a>
+    </div>
+
+    <h3>Recent Journal Entries</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Entry #</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in recent_entries %}
+            <tr>
+                <td>{{ entry.date }}</td>
+                <td>{{ entry.pk }}</td>
+                <td>{{ entry.description }}</td>
+                <td>
+                    <a href="{% url 'accounting:journal_detail' entry.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="mt-5">Recent Movements</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Account</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Debit</th>
+                <th>Credit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in recent_lines %}
+            <tr>
+                <td>{{ line.account.code }} — {{ line.account.name }}</td>
+                <td>{{ line.entry.date }}</td>
+                <td>{{ line.entry.description }}</td>
+                <td>{{ line.debit }}</td>
+                <td>{{ line.credit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

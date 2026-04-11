@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
 from .models import Customer
 from apps.addresses.models import AddressAssignment
+from django.contrib import admin
+from .models import Customer
+from apps.addresses.admin.assignment_admin import AddressAssignmentInline
 
 
 class AddressAssignmentInline(GenericTabularInline):
@@ -41,3 +44,8 @@ class CustomerAdmin(admin.ModelAdmin):
     def full_name(self, obj):
         return f"{obj.first_name} {obj.last_name}"
     full_name.short_description = "Name"
+
+
+
+
+

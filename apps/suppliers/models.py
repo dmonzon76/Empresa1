@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericRelation
 from apps.addresses.models import AddressAssignment
-
-
 
 
 class Supplier(models.Model):
@@ -15,7 +14,10 @@ class Supplier(models.Model):
 
     # Optional: contact person for companies
     contact_name = models.CharField(max_length=255, blank=True, null=True)
-
+    address_assignments = GenericRelation(
+        AddressAssignment,
+        related_query_name="supplier"
+    )
     activity = models.CharField(max_length=255, blank=True, null=True)
     tax_id = models.CharField(max_length=50, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)

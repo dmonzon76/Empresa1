@@ -1,0 +1,49 @@
+{% extends "core/bases/base.html" %}
+
+{% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
+<div class="container mt-4">
+
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'accounting:dashboard' %}">Accounting</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'accounting:journal_list' %}">Journal Entries</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Entry {{ entry.pk }}</li>
+    </ol>
+    </nav>
+
+    <a href="{% url 'accounting:journal_list' %}" class="btn btn-outline-secondary mb-3">← Back</a>
+
+    <h1>Journal Entry {{ entry.pk }}</h1>
+    <p><strong>Date:</strong> {{ entry.date }}</p>
+    <p><strong>Description:</strong> {{ entry.description }}</p>
+
+    <h3 class="mt-4">Lines</h3>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Account</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Ledger</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for line in entry.lines.all %}
+        <tr>
+            <td>{{ line.account.code }} — {{ line.account.name }}</td>
+            <td>{{ line.debit }}</td>
+            <td>{{ line.credit }}</td>
+            <td>
+                <a href="{% url 'accounting:account_ledger' line.account.pk %}"
+                   class="btn btn-sm btn-outline-primary">
+                    See Ledger
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock %}

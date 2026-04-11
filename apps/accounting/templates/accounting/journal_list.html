@@ -1,28 +1,33 @@
 {% extends "core/bases/base.html" %}
 
 {% block content %}
-<h1>Journal Entries</h1>
+<div class="container mt-4">
+    <a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
+    <h1>Journal Entries</h1>
 
-<ul>
-    {% for entry in object_list %}
-        <li>
-            <strong>Entry #{{ entry.pk }} — {{ entry.date }}</strong>
-
-            {% if entry.lines.exists %}
-                <ul>
-                    {% for line in entry.lines.all %}
-                        <li>
-                            Account: {{ line.account.code }} — {{ line.account.name }}
-                            <a href="{% url 'accounting:account_ledger' line.account.pk %}">
-                                See Account Ledger
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <em>No accounting lines</em>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Entry #</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in journal_entries %}
+            <tr>
+                <td>{{ entry.date }}</td>
+                <td>{{ entry.pk }}</td>
+                <td>{{ entry.description }}</td>
+                <td>
+                    <a href="{% url 'accounting:journal_detail' entry.pk %}" class="btn btn-sm btn-outline-primary">
+                        View
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

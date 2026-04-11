@@ -1,12 +1,13 @@
 {% extends "core/bases/base.html" %}
 
 {% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
 <h2>{{ item.product.name }}</h2>
 
 <p><strong>Current stock:</strong> {{ item.quantity }}</p>
 <p><strong>Minimum stock:</strong> {{ item.min_stock }}</p>
 
-<a href="{% url 'inventory:movement_add' %}" class="btn btn-success">New Movement</a>
+<a href="{% url 'inventory:movement_create' item.id %}" class="btn btn-success">New Movement</a>
 
 <hr>
 

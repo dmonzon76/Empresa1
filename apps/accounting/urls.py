@@ -1,14 +1,22 @@
 from django.urls import path
-from . import views
+from .views import (
+    dashboard,
+    AccountListView,
+    AccountLedgerView,
+    JournalEntryListView,
+    JournalEntryDetailView,
+    journal_create,   # ✔️ ESTA ES LA CORRECTA
+)
 
 app_name = "accounting"
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("dashboard/", views.dashboard, name="dashboard"),  # ← NUEVA
-    path("accounts/", views.AccountListView.as_view(), name="accounts_list"),
-    path("journal/", views.JournalEntryListView.as_view(), name="journal_list"),
-    path("journal/create/", views.JournalEntryCreateView.as_view(), name="journal_create"),
-    path("ledger/<int:pk>/", views.LedgerView.as_view(), name="ledger"),
-    path("account/<int:pk>/ledger/", views.AccountLedgerView.as_view(), name="account_ledger"),
+    path("", dashboard, name="dashboard"),
+
+    path("accounts/", AccountListView.as_view(), name="accounts_list"),
+    path("accounts/<int:pk>/ledger/", AccountLedgerView.as_view(), name="account_ledger"),
+
+    path("journal/", JournalEntryListView.as_view(), name="journal_list"),
+    path("journal/new/", journal_create, name="journal_create"),  # ✔️ OK
+    path("journal/<int:pk>/", JournalEntryDetailView.as_view(), name="journal_detail"),
 ]

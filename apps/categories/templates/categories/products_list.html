@@ -1,6 +1,7 @@
 {% extends "core/bases/base.html" %}
 
 {% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
 <h2>Product Categories</h2>
 
 <a href="{% url 'categories:products_create' %}" class="btn btn-primary mb-3">Add Category</a>

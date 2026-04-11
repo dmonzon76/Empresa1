@@ -28,6 +28,13 @@ class InventoryMovement(models.Model):
         (OUT, "exit"),
         (ADJUST, "balance"),
     ]
+    item = models.ForeignKey(
+    InventoryItem,
+    on_delete=models.CASCADE,
+    related_name="movements",
+    null=True,
+    blank=True
+)
 
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     movement_type = models.CharField(max_length=10, choices=MOVEMENT_TYPES)

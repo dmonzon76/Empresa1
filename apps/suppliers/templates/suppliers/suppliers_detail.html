@@ -1,24 +1,86 @@
 {% extends "core/bases/base.html" %}
 
 {% block content %}
+<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
+
 <div class="dashboard-header">
-    <h2 class="dashboard-title">Supplier: {{ supplier.display_name }}</h2>
+    <h2 class="dashboard-title">
+        <i class="bi bi-building"></i> {{ supplier.display_name }}
+    </h2>
 </div>
 
-<div class="dashboard-card mb-4">
-    <div class="dashboard-card-header">
-        <span class="dashboard-card-title">Supplier Information</span>
+<div class="row">
+
+    <!-- LEFT COLUMN: Supplier Info -->
+    <div class="col-md-6">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header">
+                <span class="dashboard-card-title">
+                    <i class="bi bi-info-circle"></i> Supplier Information
+                </span>
+            </div>
+
+            <div class="dashboard-card-body">
+                <p><strong>Type:</strong> {{ supplier.get_supplier_type_display }}</p>
+                <p><strong>Tax ID:</strong> {{ supplier.tax_id }}</p>
+                <p><strong>Activity:</strong> {{ supplier.activity }}</p>
+                <p><strong>Email:</strong> {{ supplier.email }}</p>
+                <p><strong>Phone:</strong> {{ supplier.phone }}</p>
+            </div>
+        </div>
     </div>
 
-    <div class="dashboard-card-body">
-        <p><strong>Name:</strong> {{ supplier.display_name }}</p>
-        <p><strong>Type:</strong> {{ supplier.get_supplier_type_display }}</p>
-        <p><strong>Phone:</strong> {{ supplier.phone }}</p>
-        <p><strong>Email:</strong> {{ supplier.email }}</p>
-        <p><strong>Address:</strong> {{ supplier.address }}</p>
+    <!-- RIGHT COLUMN: Addresses -->
+    <div class="col-md-6">
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header">
+                <span class="dashboard-card-title">
+                    <i class="bi bi-geo-alt"></i> Addresses
+                </span>
+            </div>
 
-        <a href="{% url 'suppliers:edit' supplier.id %}" class="btn btn-warning btn-sm">Edit</a>
-        <a href="{% url 'suppliers:delete' supplier.id %}" class="btn btn-danger btn-sm">Delete</a>
+            <div class="dashboard-card-body">
+
+                {% if supplier.address_assignments.exists %}
+                {% for a in supplier.address_assignments.all %}
+            <div class="border rounded p-3 mb-3">
+            <h6 class="mb-1">
+                <i class="{{ a.address_type.icon }} {{ a.address_type.color }}"></i>
+                {{ a.address_type.name }}
+                {% if a.is_primary %}
+                    <span class="badge bg-success">Primary</span>
+                {% endif %}
+            </h6>
+
+            <p class="mb-0 text-muted">
+                {{ a.address.full_address }}
+            </p>
+
+            {% if a.address.notes %}
+                <p class="mt-1"><em>{{ a.address.notes }}</em></p>
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% else %}
+    <p class="text-muted">No addresses registered.</p>
+    {% endif %}
+
+
+            </div>
+        </div>
     </div>
+
 </div>
+
+<!-- ACTION BUTTONS -->
+<div class="mt-3">
+    <a href="{% url 'suppliers:edit' supplier.pk %}" class="btn btn-primary btn-sm">
+        <i class="bi bi-pencil-square"></i> Edit
+    </a>
+
+    <a href="{% url 'suppliers:list' %}" class="btn btn-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i> Back
+    </a>
+</div>
+
 {% endblock %}
