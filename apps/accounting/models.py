@@ -16,6 +16,7 @@ ACCOUNT_STYLE = {
     "EXPENSE":   {"icon": "fa-solid fa-money-bill",        "color": "#dc3545"},
 }
 
+
 class Account(models.Model):
     code = models.CharField(max_length=20)
     name = models.CharField(max_length=255)
@@ -33,6 +34,11 @@ class Account(models.Model):
 
     icon = models.CharField(max_length=50, default="fa-regular fa-circle")
     color = models.CharField(max_length=20, default="#6c757d")
+
+
+    @property
+    def has_children(self):
+        return Account.objects.filter(code__startswith=self.code + ".").exists()
 
     def save(self, *args, **kwargs):
         if self.type in ACCOUNT_STYLE:
@@ -53,7 +59,8 @@ class JournalEntry(models.Model):
 
 
 class JournalEntryLine(models.Model):
-    entry = models.ForeignKey(JournalEntry, related_name="lines", on_delete=models.CASCADE)
+    entry = models.ForeignKey(
+        JournalEntry, related_name="lines", on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.PROTECT)
     debit = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     credit = models.DecimalField(max_digits=12, decimal_places=2, default=0)

@@ -15,7 +15,8 @@ class DashboardService:
 
         customers = Customer.objects.order_by("-created_at")[:5]
 
-        categories = CustomerCategory.objects.annotate(total=Count("customers"))
+        categories = CustomerCategory.objects.annotate(
+            total=Count("customers"))
         categories_labels = [c.name for c in categories]
         categories_counts = [c.total for c in categories]
 
@@ -31,7 +32,8 @@ class DashboardService:
     def get_inventory_kpis():
         total_products = Product.objects.count()
         low_stock_count = Product.objects.filter(stock__lt=10).count()
-        total_stock = Product.objects.aggregate(total=Sum("stock"))["total"] or 0
+        total_stock = Product.objects.aggregate(
+            total=Sum("stock"))["total"] or 0
 
         stock_by_unit = (
             Product.objects.values("quantity_type")
@@ -81,13 +83,11 @@ class DashboardService:
             status=SalesOrder.CONFIRMED
         ).count()
 
-        ticket_avg = (
-            SalesOrder.objects.annotate(
-                order_total=Sum("items__total")
-            ).aggregate(
-                avg=Avg("order_total")
-            )["avg"] or 0
-        )
+        ticket_avg = SalesOrder.objects.filter(
+            status=SalesOrder.CONFIRMED
+        ).aggregate(
+            avg=Avg("total")
+        )["avg"] or 0
 
         return {
             "sales_today": sales_today,

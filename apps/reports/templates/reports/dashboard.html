@@ -1,0 +1,48 @@
+{% extends "core/bases/base.html" %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary mb-3">← Back</a>
+
+<h1 class="fw-bold mb-4" style="font-size: 1.9rem; color:#1e293b;">REPORTS MODULE</h1>
+
+<div class="row g-3">
+
+    <div class="col-md-2">
+        <a href="{% url 'reports:finance_dashboard' %}" class="dashboard-nav-btn shadow-sm">
+            <i class="material-icons">account_balance</i>
+            <span>Finance</span>
+        </a>
+    </div>
+
+    <div class="col-md-2">
+        <a href="{% url 'reports:sales_dashboard' %}" class="dashboard-nav-btn shadow-sm">
+            <i class="material-icons">shopping_cart</i>
+            <span>Sales</span>
+        </a>
+    </div>
+
+    <div class="col-md-2">
+        <a href="{% url 'reports:inventory_dashboard' %}" class="dashboard-nav-btn shadow-sm">
+            <i class="material-icons">inventory_2</i>
+            <span>Inventory</span>
+        </a>
+    </div>
+
+    <div class="col-md-2">
+        <a href="{% url 'reports:crm_dashboard' %}" class="dashboard-nav-btn shadow-sm">
+            <i class="material-icons">group</i>
+            <span>CRM</span>
+        </a>
+    </div>
+
+    <div class="col-md-2">
+        <a href="{% url 'reports:purchases_dashboard' %}" class="dashboard-nav-btn shadow-sm">
+            <i class="material-icons">receipt_long</i>
+            <span>Purchases</span>
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

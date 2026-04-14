@@ -1,0 +1,99 @@
+{% extends "core/bases/base.html" %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary mb-3">← Back</a>
+
+<h1 class="fw-bold mb-4" style="font-size: 1.9rem; color:#1e293b;">INVENTORY DASHBOARD</h1>
+
+<!-- KPI ROW -->
+<div class="row g-4">
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Total Stock (Units)</div>
+            <div class="kpi-value">{{ total_stock }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Stock Value</div>
+            <div class="kpi-value">{{ stock_value }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Low Stock Items</div>
+            <div class="kpi-value">{{ low_stock }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">No Movement (60 Days)</div>
+            <div class="kpi-value">{{ no_movement }}</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CHARTS -->
+<div class="row g-4 mt-4">
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Stock by Category</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartStockCategory"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Rotation by Category</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartRotation"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4 mt-4">
+
+    <div class="col-md-12">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Monthly Movements</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartMovements"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+window.inventoryData = {
+    labels_category: {{ labels_category|safe }},
+    values_category: {{ values_category|safe }},
+    labels_rotation: {{ labels_rotation|safe }},
+    values_rotation: {{ values_rotation|safe }},
+    labels_movements: {{ labels_movements|safe }},
+    values_movements: {{ values_movements|safe }},
+};
+</script>
+<script src="{% static 'reports/js/inventory.js' %}"></script>
+{% endblock %}

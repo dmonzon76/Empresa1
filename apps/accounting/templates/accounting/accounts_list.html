@@ -1,45 +1,155 @@
 {% extends "core/bases/base.html" %}
+{% load accounting_filters %}
 
 {% block content %}
+<style>
+    .tree-row { cursor: pointer; }
+    .tree-hidden { display: none; }
+    .tree-arrow {
+        font-size: 14px;
+        margin-right: 6px;
+        transition: transform 0.2s ease;
+    }
+    .tree-arrow.open {
+        transform: rotate(90deg);
+    }
+</style>
+
 <div class="container mt-4">
-        <a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
-        <a href="{% url 'accounting:account_ledger' account.pk %}">
-            <button class="btn btn-sm btn-outline-primary mb-3">See Ledger</button>
-</a>
 
-    <h1>Chart of Accounts</h1>
+    <a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
 
-    <table class="table table-striped mt-3">
-    <thead>
-        <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Balance</th>
-            <th>Ledger</th>
-        </tr>
-    </thead>
-    <tbody>
+    <h1>Chart of Accounts (IFRS)</h1>
+
+    <table class="table table-hover mt-3">
+        <thead class="table-light">
+            <tr>
+                <th style="width: 150px;">Code</th>
+                <th>Name</th>
+                <th style="width: 200px;">Balance</th>
+                <th style="width: 120px;">Ledger</th>
+            </tr>
+        </thead>
+
+        <tbody>
         {% for account in accounts %}
-        <tr>
-            <td>{{ account.code }}</td>
-            <td>{{ account.name }}</td>
-            <td>
-                {{ account.total_debit|default:0|floatformat:2 }}
-                -
-                {{ account.total_credit|default:0|floatformat:2 }}
-                =
-                {{ account.total_debit|default:0|floatformat:2|add:"-"|add:account.total_credit|default:0 }}
-            </td>
-            <td>
-                <a href="{% url 'accounting:account_ledger' account.pk %}"
-                   class="btn btn-sm btn-outline-primary">
-                    See Ledger
-                </a>
-            </td>
-        </tr>
+
+            {% with segments=account.code|split:"." %}
+            {% with level=segments|length %}
+
+            <tr class="tree-row"
+                data-code="{{ account.code }}"
+                data-level="{{ level }}"
+                data-parent="{{ account.code|slice:":-3" }}"
+                style="background-color:
+                    {% if level == 1 %}#e8f1ff
+                    {% elif level == 2 %}#f3f7ff
+                    {% elif level == 3 %}#fafcff
+                    {% else %}white
+                    {% endif %};
+            ">
+
+                <!-- Código + flecha -->
+                <td style="padding-left: {{ level|add:'-1'|mul:20 }}px;">
+                    {% if account.has_children %}
+                        <span class="tree-arrow">▶</span>
+                    {% else %}
+                        <span style="display:inline-block; width:14px;"></span>
+                    {% endif %}
+                    <strong>{{ account.code }}</strong>
+                </td>
+
+                <!-- Nombre -->
+                <td>
+                    {% if level == 1 %}
+                        <strong style="font-size: 1.2rem;">{{ account.name }}</strong>
+                    {% elif level == 2 %}
+                        <strong style="font-size: 1.05rem;">{{ account.name }}</strong>
+                    {% elif level == 3 %}
+                        <span style="font-weight: 600;">{{ account.name }}</span>
+                    {% else %}
+                        {{ account.name }}
+                    {% endif %}
+                </td>
+
+                <!-- Saldo -->
+                <td>
+                    {% with debit=account.total_debit|default:0 credit=account.total_credit|default:0 %}
+                        {% with balance=debit|floatformat:2|add:"-"|add:credit %}
+                            {% if debit > credit %}
+                                <strong style="color:#0a7b00;">{{ balance }}</strong>
+                            {% elif debit < credit %}
+                                <strong style="color:#b30000;">{{ balance }}</strong>
+                            {% else %}
+                                <strong style="color:#555;">{{ balance }}</strong>
+                            {% endif %}
+                        {% endwith %}
+                    {% endwith %}
+                </td>
+
+                <!-- Botón Ledger -->
+                <td>
+                    <a href="{% url 'accounting:account_ledger' account.pk %}"
+                       class="btn btn-sm btn-outline-primary">
+                        Ledger
+                    </a>
+                </td>
+
+            </tr>
+
+            {% endwith %}
+            {% endwith %}
         {% endfor %}
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Detectar hijos por prefijo del código
+    const rows = document.querySelectorAll(".tree-row");
+
+    rows.forEach(row => {
+        const code = row.dataset.code;
+
+        // Si no tiene hijos, no colapsa
+        const hasChildren = [...rows].some(r =>
+            r.dataset.code.startsWith(code + ".")
+        );
+
+        if (!hasChildren) return;
+
+        // Marcar hijos como ocultos inicialmente
+        [...rows].forEach(r => {
+            if (r.dataset.code.startsWith(code + ".") && r !== row) {
+                r.classList.add("tree-hidden");
+            }
+        });
+
+        // Evento de colapsar/expandir
+        row.addEventListener("click", function (e) {
+            if (!e.target.classList.contains("tree-arrow")) return;
+
+            const arrow = e.target;
+            const isOpen = arrow.classList.contains("open");
+
+            arrow.classList.toggle("open");
+
+            [...rows].forEach(r => {
+                if (r.dataset.code.startsWith(code + ".") && r !== row) {
+                    if (isOpen) {
+                        r.classList.add("tree-hidden");
+                        r.querySelectorAll(".tree-arrow").forEach(a => a.classList.remove("open"));
+                    } else {
+                        r.classList.remove("tree-hidden");
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+
 {% endblock %}

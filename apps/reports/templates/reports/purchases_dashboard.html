@@ -1,0 +1,95 @@
+{% extends "core/bases/base.html" %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary mb-3">← Back</a>
+
+<h1 class="fw-bold mb-4" style="font-size: 1.9rem; color:#1e293b;">PURCHASES DASHBOARD</h1>
+
+<!-- KPI ROW -->
+<div class="col-md-2">
+    <div class="kpi-card shadow-sm">
+        <div class="kpi-title">Purchases Today</div>
+        <div class="kpi-value">{{ purchases_day }}</div>
+    </div>
+</div>
+
+
+    <div class="col-md-2">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Purchases This Month</div>
+            <div class="kpi-value">{{ purchases_month }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Total Orders</div>
+            <div class="kpi-value">{{ total_orders }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Average Cost</div>
+            <div class="kpi-value">{{ average_cost }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Pending Orders</div>
+            <div class="kpi-value">{{ pending_orders }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Top Supplier</div>
+            <div class="kpi-value">{{ top_supplier }}</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CHARTS -->
+<div class="row g-4 mt-4">
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Purchases (Last 12 Months)</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartPurchases12"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Purchases by Supplier</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartPurchasesSupplier"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+window.purchasesData = {
+    labels_12: {{ labels_12|safe }},
+    values_12: {{ values_12|safe }},
+    labels_suppliers: {{ labels_suppliers|safe }},
+    values_suppliers: {{ values_suppliers|safe }},
+};
+</script>
+<script src="{% static 'reports/js/purchases.js' %}"></script>
+{% endblock %}

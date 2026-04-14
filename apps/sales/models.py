@@ -1,88 +1,45 @@
 from django.db import models
-from django.utils import timezone
-# Create your models here.
+from apps.customers.models import Customer
+from apps.products.models import Product
 
 
 class SalesOrder(models.Model):
-    # Possible states of the order
     DRAFT = "DRAFT"
     CONFIRMED = "CONFIRMED"
-    CANCELLED = "CANCELLED"
 
     STATUS_CHOICES = [
         (DRAFT, "Draft"),
         (CONFIRMED, "Confirmed"),
-        (CANCELLED, "Cancelled"),
     ]
 
-    customer = models.ForeignKey(
-        "customers.Customer",
-        on_delete=models.PROTECT,
-        related_name="sales_orders"
-    )
-
-    date = models.DateField(default=timezone.now)
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default=DRAFT
-    )
-
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     notes = models.TextField(blank=True, null=True)
 
+    date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ["-date", "-id"]
-        verbose_name = "Sales Order"
-        verbose_name_plural = "Sales Orders"
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=DRAFT)
+
+    total = models.DecimalField(max_digits=12, decimal_places=2, default=0)
 
     def __str__(self):
-        return f"Order #{self.id} - {self.customer}"
+        return f"Order #{self.id}"
 
-    @property
-    def total_amount(self):
-        return sum(item.subtotal for item in self.items.all())
-
-    @property
-    def total_items(self):
-        return sum(item.quantity for item in self.items.all())
-
-    def confirm(self):
-        """Confirm the order (Billing will then convert it into an invoice)."""
-        self.status = self.CONFIRMED
-        self.save()
-
-    def cancel(self):
-        """Cancel the order (if it has not yet been invoiced)."""
-        self.status = self.CANCELLED
+    def recalculate_total(self):
+        total = sum(item.subtotal() for item in self.items.all())
+        self.total = total
         self.save()
 
 
 class SalesOrderItem(models.Model):
-    order = models.ForeignKey(
-        SalesOrder,
-        on_delete=models.CASCADE,
-        related_name="items"
-    )
-
-    product = models.ForeignKey(
-        "products.Product",
-        on_delete=models.PROTECT
-    )
+    order = models.ForeignKey(SalesOrder, on_delete=models.CASCADE, related_name="items")
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
 
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
 
-    class Meta:
-        verbose_name = "Order Item"
-        verbose_name_plural = "Order Items"
+    def subtotal(self):
+        return self.quantity * self.price
 
     def __str__(self):
         return f"{self.product} x {self.quantity}"
-
-    @property
-    def subtotal(self):
-        return self.quantity * self.price

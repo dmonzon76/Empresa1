@@ -1,0 +1,99 @@
+{% extends "core/bases/base.html" %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary mb-3">← Back</a>
+
+<h1 class="fw-bold mb-4" style="font-size: 1.9rem; color:#1e293b;">SALES DASHBOARD</h1>
+
+<!-- KPI ROW -->
+<div class="row g-4">
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Sales Today</div>
+            <div class="kpi-value">{{ sales_day }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Sales This Month</div>
+            <div class="kpi-value">{{ sales_month }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Total Orders</div>
+            <div class="kpi-value">{{ total_orders }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Average Ticket</div>
+            <div class="kpi-value">{{ average_ticket }}</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CHARTS -->
+<div class="row g-4 mt-4">
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Sales by Day (Last 30 Days)</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartSalesByDay"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Sales by Category</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartSalesByCategory"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4 mt-4">
+
+    <div class="col-md-12">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Top 10 Products</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartTopProducts"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+window.salesData = {
+    labels_day: {{ labels_day|safe }},
+    values_day: {{ values_day|safe }},
+    labels_category: {{ labels_category|safe }},
+    values_category: {{ values_category|safe }},
+    labels_top: {{ labels_top|safe }},
+    values_top: {{ values_top|safe }},
+};
+</script>
+<script src="{% static 'reports/js/sales.js' %}"></script>
+{% endblock %}

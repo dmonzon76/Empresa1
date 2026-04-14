@@ -23,8 +23,8 @@ class SalesOrderItemInline(admin.TabularInline):
 class SalesOrderAdmin(admin.ModelAdmin):
     list_display = ("id", "customer", "date", "status", "total_amount_display")
     list_filter = ("status", "date")
-    search_fields = ("customer__name",)
-    readonly_fields = ("created_at", "updated_at", "total_amount_display")
+    search_fields = ("customer__first_name", "customer__last_name")
+    readonly_fields = ("created_at", "total_amount_display")
     inlines = [SalesOrderItemInline]
 
     fieldsets = (
@@ -35,18 +35,19 @@ class SalesOrderAdmin(admin.ModelAdmin):
             "fields": ("total_amount_display",),
         }),
         ("Traceability", {
-            "fields": ("created_at", "updated_at"),
+            "fields": ("created_at",),
         }),
     )
 
     def total_amount_display(self, obj):
-        return f"${obj.total_amount}"
+        return f"${obj.total}"
     total_amount_display.short_description = "Total"
 
 
 @admin.register(SalesOrderItem)
 class SalesOrderItemAdmin(admin.ModelAdmin):
-    list_display = ("order", "product", "quantity", "price", "subtotal_display")
+    list_display = ("order", "product", "quantity",
+                    "price", "subtotal_display")
     search_fields = ("order__id", "product__name")
 
     def subtotal_display(self, obj):

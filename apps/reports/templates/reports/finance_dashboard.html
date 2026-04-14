@@ -1,0 +1,105 @@
+{% extends "core/bases/base.html" %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary mb-3">← Back</a>
+
+<h1 class="fw-bold mb-4" style="font-size: 1.9rem; color:#1e293b;">FINANCE DASHBOARD</h1>
+
+<!-- KPI ROW -->
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Income (Month)</div>
+            <div class="kpi-value" id="income_month" data-value="{{ income_month }}">
+                {{ income_month }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Expenses (Month)</div>
+            <div class="kpi-value" id="expenses_month" data-value="{{ expenses_month }}">
+                {{ expenses_month }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Operating Result</div>
+            <div class="kpi-value" id="operating_result" data-value="{{ operating_result }}">
+                {{ operating_result }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- KPI ROW 2 -->
+<div class="row g-4 mt-1">
+
+    <div class="col-md-4">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Available Cash</div>
+            <div class="kpi-value" id="cash_available" data-value="{{ cash_available }}">
+                {{ cash_available }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Accounts Receivable</div>
+            <div class="kpi-value" id="accounts_receivable" data-value="{{ accounts_receivable }}">
+                {{ accounts_receivable }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="kpi-card shadow-sm">
+            <div class="kpi-title">Accounts Payable</div>
+            <div class="kpi-value" id="accounts_payable" data-value="{{ accounts_payable }}">
+                {{ accounts_payable }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CHARTS -->
+<div class="row g-4 mt-4">
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Income vs Expenses</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartIncomeExpenses"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="dashboard-card shadow-sm">
+            <div class="dashboard-card-header">
+                <div class="dashboard-card-title">Monthly Cashflow</div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="chartCashflow"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'reports/js/finance.js' %}"></script>
+{% endblock %}
