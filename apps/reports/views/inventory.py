@@ -17,7 +17,7 @@ def inventory_dashboard(request):
 
     stock_value = (
         InventoryItem.objects
-        .annotate(value=F("quantity") * F("product__cost"))
+        .annotate(value=F("quantity") * F("product__average_cost"))
         .aggregate(total=Sum("value"))
     )["total"] or 0
 

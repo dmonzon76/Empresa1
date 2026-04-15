@@ -12,15 +12,15 @@ def finance_dashboard(request):
     # Income (accounts starting with 4)
     income_month = JournalEntryLine.objects.filter(
         account__code__startswith="4",
-        journal_entry__date__year=year,
-        journal_entry__date__month=month
+        entry__date__year=year,
+        entry__date__month=month
     ).aggregate(total=Sum("credit") - Sum("debit"))["total"] or 0
 
     # Expenses (accounts starting with 5)
     expenses_month = JournalEntryLine.objects.filter(
         account__code__startswith="5",
-        journal_entry__date__year=year,
-        journal_entry__date__month=month
+        entry__date__year=year,
+        entry__date__month=month
     ).aggregate(total=Sum("debit") - Sum("credit"))["total"] or 0
 
     # Operating result

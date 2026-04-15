@@ -1,62 +1,61 @@
-{% extends "core/bases/base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "core/bases/base.html" %} {% load static %} {% block content %}
 <a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary mb-3">← Back</a>
 
-<h1 class="fw-bold mb-4" style="font-size: 1.9rem; color:#1e293b;">CRM DASHBOARD</h1>
+<h1 class="fw-bold mb-4" style="font-size: 1.9rem; color: #1e293b">CRM DASHBOARD</h1>
 
 <!-- KPI ROW -->
 <div class="row g-4">
-
-    <div class="col-md-3">
-        <div class="kpi-card shadow-sm">
-            <div class="kpi-title">New Clients (Month)</div>
-            <div class="kpi-value">{{ new_clients_month }}</div>
-        </div>
+  <div class="col-md-3">
+    <div class="kpi-card shadow-sm">
+      <div class="kpi-title">New Clients (Month)</div>
+      <div class="kpi-value">{{ new_clients_month }}</div>
     </div>
+  </div>
 
-    <div class="col-md-3">
-        <div class="kpi-card shadow-sm">
-            <div class="kpi-title">Active Clients</div>
-            <div class="kpi-value">{{ active_clients }}</div>
-        </div>
+  <div class="col-md-3">
+    <div class="kpi-card shadow-sm">
+      <div class="kpi-title">Active Clients</div>
+      <div class="kpi-value">{{ active_clients }}</div>
     </div>
+  </div>
 
-    <div class="col-md-3">
-        <div class="kpi-card shadow-sm">
-            <div class="kpi-title">Inactive Clients</div>
-            <div class="kpi-value">{{ inactive_clients }}</div>
-        </div>
+  <div class="col-md-3">
+    <div class="kpi-card shadow-sm">
+      <div class="kpi-title">Inactive Clients</div>
+      <div class="kpi-value">{{ inactive_clients }}</div>
     </div>
+  </div>
 
-    <div class="col-md-3">
-        <div class="kpi-card shadow-sm">
-            <div class="kpi-title">Churn (60 days)</div>
-            <div class="kpi-value">{{ churn }}</div>
-        </div>
+  <div class="col-md-3">
+    <div class="kpi-card shadow-sm">
+      <div class="kpi-title">Churn (60 days)</div>
+      <div class="kpi-value">{{ churn }}</div>
     </div>
-
+  </div>
 </div>
 
 <!-- CHARTS -->
 <div class="row g-4 mt-4">
-
-    <div class="col-md-6">
-        <div class="dashboard-card shadow-sm">
-            <div class="dashboard-card-header">
-                <div class="dashboard-card-title">New Clients (Last 12 Months)</div>
-            </div>
-            <div class="dashboard-card-body">
-                <canvas id="chartNewClients"></canvas>
-            </div>
-        </div>
+  <div class="col-md-6">
+    <div class="dashboard-card shadow-sm">
+      <div class="dashboard-card-header">
+        <div class="dashboard-card-title">New Clients (Last 12 Months)</div>
+      </div>
+      <div class="dashboard-card-body">
+        <canvas id="chartNewClients"></canvas>
+      </div>
     </div>
+  </div>
 
-    <div class="col-md-6">
-        <div class="dashboard-card shadow-sm">
-            <div class="dashboard-card-header">
-                <div class="dashboard-card-title">Active vs Inactive</div>
-            </div>
-            <div class="dashboard-card-body">
-                <canvas id="chartActiveInactive"></canvas>
+  <div class="col-md-6">
+    <div class="dashboard-card shadow-sm">
+      <div class="dashboard-card-header">
+        <div class="dashboard-card-title">Active vs Inactive</div>
+      </div>
+      <div class="dashboard-card-body">
+        <canvas id="chartActiveInactive"></canvas>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.db.models import Sum
+from django.db.models import Sum, CharField, Value
+from django.db.models.functions import Coalesce, Concat
 from datetime import date, timedelta
 
 from apps.purchases.models import PurchaseOrder
-from apps.suppliers.models import Supplier
 
 
 def purchases_dashboard(request):
@@ -38,12 +38,24 @@ def purchases_dashboard(request):
 
     # Purchases by supplier
     purchases_supplier = (
-        PurchaseOrder.objects.values("supplier__name")
+        PurchaseOrder.objects
+        .annotate(
+            supplier_name=Coalesce(
+                "supplier__company_name",
+                Concat(
+                    "supplier__first_name",
+                    Value(" "),
+                    "supplier__last_name",
+                    output_field=CharField(),
+                ),
+            )
+        )
+        .values("supplier_name")
         .annotate(total=Sum("total_amount"))
         .order_by("-total")
     )
 
-    labels_suppliers = [p["supplier__name"] for p in purchases_supplier]
+    labels_suppliers = [p["supplier_name"] for p in purchases_supplier]
     values_suppliers = [float(p["total"]) for p in purchases_supplier]
 
     # Top supplier
