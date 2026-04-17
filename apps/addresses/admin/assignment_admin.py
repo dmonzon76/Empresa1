@@ -1,8 +1,6 @@
 from django.contrib import admin
-from ..models import AddressAssignment
-from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericTabularInline
-from apps.addresses.models import AddressAssignment
+from ..models import AddressAssignment
 
 
 @admin.register(AddressAssignment)
@@ -37,6 +35,7 @@ class AddressAssignmentAdmin(admin.ModelAdmin):
         (None, {"fields": ("content_type", "object_id", "address", "address_type", "is_primary")}),
         ("Timestamps", {"fields": ("created_at", "updated_at")}),
     )
+
 
 class AddressAssignmentInline(GenericTabularInline):
     model = AddressAssignment

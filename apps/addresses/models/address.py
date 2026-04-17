@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
@@ -14,10 +15,8 @@ class Address(models.Model):
     class Meta:
         ordering = ["country", "city", "street"]
 
-        def __str__(self):
-            return self.full_address
-
-
+    def __str__(self):
+        return self.full_address
 
     @property
     def full_address(self):

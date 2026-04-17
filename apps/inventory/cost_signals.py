@@ -7,8 +7,8 @@ from django.dispatch import receiver
 @receiver(post_save, sender=InventoryMovement)
 def update_average_cost(sender, instance, created, **kwargs):
     """
-    Recalcula el costo promedio cuando entra stock.
-    Solo aplica para movimientos tipo IN.
+    Recalculates the average cost when stock is received.
+    Only applies to IN type transactions
     """
     if not created:
         return
@@ -23,7 +23,7 @@ def update_average_cost(sender, instance, created, **kwargs):
     previous_cost = product.average_cost or 0
     incoming_cost = instance.unit_cost
 
-    # Primera compra o stock previo cero
+    # First purchase or zero previous stock
     if previous_stock <= 0:
         product.average_cost = incoming_cost
     else:

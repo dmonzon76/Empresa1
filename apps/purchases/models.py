@@ -14,5 +14,5 @@ class PurchaseOrder(models.Model):
     class Meta:
         ordering = ["-date", "-id"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.number

@@ -3,12 +3,12 @@
 {% block title %}List{% endblock %}
 
 {% block content %}
-<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>
+<a href="#" onclick="history.back(); return false;" class="btn btn-outline-secondary mb-3">← Back</a>
 <h2>{% block list_title %}List{% endblock %}</h2>
 
 <div>
     {% block list_content %}
-    <!-- Aquí va la tabla o listado -->
+    <!--Here is the table or list -->
     {% endblock %}
 </div>
 {% endblock %}

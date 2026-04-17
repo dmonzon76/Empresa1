@@ -29,12 +29,12 @@ class InventoryMovement(models.Model):
         (ADJUST, "balance"),
     ]
     item = models.ForeignKey(
-    InventoryItem,
-    on_delete=models.CASCADE,
-    related_name="movements",
-    null=True,
-    blank=True
-)
+        InventoryItem,
+        on_delete=models.CASCADE,
+        related_name="movements",
+        null=True,
+        blank=True
+    )
 
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     movement_type = models.CharField(max_length=10, choices=MOVEMENT_TYPES)
@@ -57,7 +57,8 @@ class InventoryMovement(models.Model):
         return f"{self.movement_type} — {self.product.name} — {self.quantity}"
 
     def apply(self):
-        item, created = InventoryItem.objects.get_or_create(product=self.product)
+        item, created = InventoryItem.objects.get_or_create(
+            product=self.product)
 
         if self.movement_type == self.IN:
             item.quantity += self.quantity

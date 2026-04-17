@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+import importlib
 
 
 class InventoryConfig(AppConfig):
@@ -6,5 +7,5 @@ class InventoryConfig(AppConfig):
     name = 'apps.inventory'
 
     def ready(self):
-        import apps.inventory.stock_signals
-        import apps.inventory.cost_signals
+        importlib.import_module('apps.inventory.stock_signals')
+        importlib.import_module('apps.inventory.cost_signals')

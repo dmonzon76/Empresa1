@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Administrative Panel{% endblock %}</title>
 
     {% load static %}
@@ -16,14 +17,13 @@
 <body>
     {% include "core/includes/navbar.html" %}
 
-
     <div class="layout-wrapper">
 
         {% include "core/includes/sidebar.html" %}
 
         <main class="main-content">
             {% block content %}
-<a href="javascript:history.back()" class="btn btn-outline-secondary mb-3">← Back</a>{% endblock %}
+<a href="#" onclick="window.history.back(); return false;" class="btn btn-outline-secondary mb-3">← Back</a>{% endblock %}
         </main>
 
     </div>

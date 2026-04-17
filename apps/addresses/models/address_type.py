@@ -12,8 +12,8 @@ class AddressType(models.Model):
         verbose_name = "Address Type"
         verbose_name_plural = "Address Types"
 
-        def __str__(self):
-            return str(self.name)
+    def __str__(self):
+        return str(self.name)
 
     # ---------------------------------------------------------
     # CONS BY TYPE (Bootstrap Icons)

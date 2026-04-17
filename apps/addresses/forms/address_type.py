@@ -1,5 +1,5 @@
 from django import forms
-from ..models import AddressType
+from apps.addresses.models import AddressType
 
 class AddressTypeForm(forms.ModelForm):
     class Meta:

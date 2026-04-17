@@ -19,7 +19,7 @@ class AddressAssignmentForm(forms.ModelForm):
         address = cleaned.get("address")
         is_primary = cleaned.get("is_primary")
 
-        # Si todavía no está asociada a una entidad, no validamos
+        # If it is not yet associated with an entity, we do not validate it.
         if not self.instance.content_type_id or not self.instance.object_id:
             return cleaned
 

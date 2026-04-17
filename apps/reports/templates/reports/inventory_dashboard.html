@@ -85,15 +85,21 @@
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{ labels_category|json_script:"labels_category_data" }}
+{{ values_category|json_script:"values_category_data" }}
+{{ labels_rotation|json_script:"labels_rotation_data" }}
+{{ values_rotation|json_script:"values_rotation_data" }}
+{{ labels_movements|json_script:"labels_movements_data" }}
+{{ values_movements|json_script:"values_movements_data" }}
 <script>
 window.inventoryData = {
-    labels_category: {{ labels_category|safe }},
-    values_category: {{ values_category|safe }},
-    labels_rotation: {{ labels_rotation|safe }},
-    values_rotation: {{ values_rotation|safe }},
-    labels_movements: {{ labels_movements|safe }},
-    values_movements: {{ values_movements|safe }},
-};
+    labels_category: JSON.parse(document.getElementById('labels_category_data').textContent),
+    values_category: JSON.parse(document.getElementById('values_category_data').textContent),
+    labels_rotation: JSON.parse(document.getElementById('labels_rotation_data').textContent),
+    values_rotation: JSON.parse(document.getElementById('values_rotation_data').textContent),
+    labels_movements: JSON.parse(document.getElementById('labels_movements_data').textContent),
+    values_movements: JSON.parse(document.getElementById('values_movements_data').textContent),
+}
 </script>
 <script src="{% static 'reports/js/inventory.js' %}"></script>
 {% endblock %}
